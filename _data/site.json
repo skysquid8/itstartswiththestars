@@ -25,11 +25,11 @@
     "constellationNodes": [
       { "id": "daily", "px": 0.15, "py": 0.24, "label": "Daily Cosmic", "desc": "Today's aspects, moon & tarot draw", "r": 9, "href": "#daily" },
       { "id": "tarot", "px": 0.80, "py": 0.20, "label": "Tarot Readings", "desc": "1:1 sessions from $120", "r": 9, "href": "#services" },
-      { "id": "chart", "px": 0.12, "py": 0.65, "label": "Birth Chart", "desc": "Your full natal map \u2014 $220", "r": 9, "href": "#services" },
-      { "id": "synastry", "px": 0.84, "py": 0.62, "label": "Relationship Chart", "desc": "Synastry & composite \u2014 $280", "r": 9, "href": "#services" },
+      { "id": "chart", "px": 0.12, "py": 0.65, "label": "Birth Chart", "desc": "Birth Chart & Interpretation \u2014 $175", "r": 9, "href": "#services" },
+      { "id": "synastry", "px": 0.84, "py": 0.62, "label": "Synastry", "desc": "Relationship synastry \u2014 $180", "r": 9, "href": "#services" },
       { "id": "parties", "px": 0.28, "py": 0.82, "label": "Cosmic Gatherings", "desc": "Dinner & cocktail party tarot", "r": 9, "href": "#parties" },
       { "id": "book", "px": 0.72, "py": 0.80, "label": "Book a Session", "desc": "All offerings \u2014 reserve your time", "r": 11, "href": "#booking" },
-      { "id": "bundle", "px": 0.50, "py": 0.28, "label": "Trilogy Bundle", "desc": "3 sessions across 90 days \u2014 $480", "r": 8, "href": "#services" }
+      { "id": "bundle", "px": 0.50, "py": 0.28, "label": "Triad Bundle", "desc": "Birth Chart / Progressed / Location \u2014 $200", "r": 8, "href": "#services" }
     ],
     "constellationLines": [
       ["daily", "chart"], ["daily", "bundle"], ["bundle", "tarot"], ["tarot", "synastry"],
@@ -122,39 +122,39 @@
       },
       {
         "icon": "\u2b50",
-        "name": "Birth Chart Deep Dive",
+        "name": "Birth Chart and Interpretation",
         "featured": true,
         "badge": "Most Popular",
         "tagline": "The full map of who you came here to be",
-        "description": "A comprehensive 90-minute natal chart analysis \u2014 sun, moon, rising, planetary placements, aspects, and life timing through progressions and transits.",
-        "price": "$220",
-        "priceNote": "90-minute private session",
+        "description": "A comprehensive natal chart analysis \u2014 sun, moon, rising, planetary placements, aspects, and life timing through progressions and transits.",
+        "price": "$175",
+        "priceNote": "Private session",
         "features": ["Complete natal chart analysis", "Current transits & year ahead", "PDF chart + written report", "Recording + 7-day follow-up"],
-        "buttonText": "Book Deep Dive"
+        "buttonText": "Book Birth Chart"
       },
       {
         "icon": "\u2728",
-        "name": "Relationship Synastry",
+        "name": "Synastry",
         "featured": false,
         "badge": "",
         "tagline": "Why you found each other \u2014 and what it means",
-        "description": "A 90-minute synastry and composite chart reading for couples or business partners. Understand your connection at the cosmic level.",
-        "price": "$280",
-        "priceNote": "90 min \u00b7 two charts",
+        "description": "A synastry and composite chart reading for couples or business partners. Understand your connection at the cosmic level.",
+        "price": "$180",
+        "priceNote": "Two charts",
         "features": ["Synastry + composite charts", "Compatibility themes & gifts", "Karmic patterns & lessons", "Both parties may attend"],
         "buttonText": "Book Synastry"
       },
       {
         "icon": "\ud83d\udce6",
-        "name": "Bundle: The Trilogy",
+        "name": "The Triad Bundle",
         "featured": false,
         "badge": "",
-        "tagline": "Past \u00b7 Present \u00b7 Future \u2014 the full picture",
-        "description": "Three sessions across 90 days: natal chart, midpoint tarot check-in, and a forward-looking solar return reading. The most transformative offering.",
-        "price": "$480",
-        "priceNote": "3 sessions \u00b7 save $80",
-        "features": ["Natal deep dive (90 min)", "Midpoint tarot check-in (45 min)", "Solar return + year ahead (60 min)", "Priority scheduling"],
-        "buttonText": "Book Bundle"
+        "tagline": "Birth Chart \u00b7 Progressed \u00b7 Location",
+        "description": "Three powerful sessions: your natal birth chart, a progressed chart showing how you've evolved, and an astrolocation reading to find your best places on Earth.",
+        "price": "$200",
+        "priceNote": "3 sessions",
+        "features": ["Birth chart reading", "Progressed chart reading", "Astrolocation reading", "Priority scheduling"],
+        "buttonText": "Book Triad"
       },
       {
         "icon": "\ud83d\udc65",
@@ -170,15 +170,27 @@
       },
       {
         "icon": "\ud83c\udf19",
-        "name": "Monthly Membership",
+        "name": "Monthly Forecast",
         "featured": false,
         "badge": "",
         "tagline": "Stay aligned, all year long",
-        "description": "Monthly new moon intentions, full moon release tarot, private community access, and 20% off all individual sessions.",
+        "description": "A personalized monthly forecast based on your natal chart and current transits. Know what's coming and how to work with the energy.",
         "price": "$55",
-        "priceNote": "per month \u00b7 cancel anytime",
-        "features": ["2 group ceremonies/month", "Private community access", "Monthly cosmic newsletter", "20% off all 1:1 sessions"],
-        "buttonText": "Join Circle"
+        "priceNote": "per month",
+        "features": ["Personalized monthly forecast", "Transit highlights for your chart", "Key dates & opportunities", "Delivered to your inbox"],
+        "buttonText": "Get Forecast"
+      },
+      {
+        "icon": "\ud83c\udf0d",
+        "name": "Astrolocation Reading",
+        "featured": false,
+        "badge": "",
+        "tagline": "Find where on Earth you thrive",
+        "description": "An astrocartography reading that maps your birth chart onto the globe, revealing the places where you'll find love, success, creativity, and transformation.",
+        "price": "$150",
+        "priceNote": "Private session",
+        "features": ["Full astrocartography map", "Best cities for your goals", "Relocation insights", "PDF map + written summary"],
+        "buttonText": "Book Astrolocation"
       }
     ]
   },

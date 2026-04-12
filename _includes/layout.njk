@@ -258,6 +258,12 @@ footer{padding:5rem 4rem 2.5rem;border-top:1px solid rgba(201,168,76,0.08);posit
   .daily,.services,.parties,.booking,.testimonials{padding:5rem 1.5rem;}
   .booking-form{padding:2rem;}
   .hero-title h1{font-size:clamp(2.5rem,11vw,5rem);}
+  .hero-eyebrow{font-size:0.82rem;letter-spacing:0.25em;}
+  .hero-hint{font-size:0.78rem;letter-spacing:0.2em;}
+  .section-label{font-size:0.78rem;letter-spacing:0.3em;}
+  .nav-logo{font-size:1.05rem;}
+  .nav-cta{font-size:0.82rem;padding:0.65rem 1.6rem;}
+  .photo-credit{font-size:0.65rem;}
 }
 </style>
 </head>
@@ -432,12 +438,13 @@ footer{padding:5rem 4rem 2.5rem;border-top:1px solid rgba(201,168,76,0.08);posit
     <div class="form-row"><div class="form-group"><label class="form-label">Birth Time (if known)</label><input type="time" class="form-input"></div><div class="form-group"><label class="form-label">Birth City</label><input type="text" class="form-input" placeholder="City, Country"></div></div>
     <p class="form-label" style="margin-bottom:0.9rem;">{{ site.booking.sessionPickerLabel }}</p>
     <div class="session-picker" id="sessionPicker">
-      <div class="session-option active" data-price="120" onclick="selectSession(this)"><div class="session-option-icon">&#128302;</div><div class="session-option-name">Tarot Reading</div><div class="session-option-price">$120</div></div>
-      <div class="session-option" data-price="220" onclick="selectSession(this)"><div class="session-option-icon">&#11088;</div><div class="session-option-name">Birth Chart</div><div class="session-option-price">$220</div></div>
-      <div class="session-option" data-price="280" onclick="selectSession(this)"><div class="session-option-icon">&#10024;</div><div class="session-option-name">Synastry</div><div class="session-option-price">$280</div></div>
-      <div class="session-option" data-price="480" onclick="selectSession(this)"><div class="session-option-icon">&#128230;</div><div class="session-option-name">Trilogy Bundle</div><div class="session-option-price">$480</div></div>
-      <div class="session-option" data-price="95" onclick="selectSession(this)"><div class="session-option-icon">&#128101;</div><div class="session-option-name">Group Session</div><div class="session-option-price">$95 / person</div></div>
-      <div class="session-option" data-price="55" onclick="selectSession(this)"><div class="session-option-icon">&#127769;</div><div class="session-option-name">Monthly Circle</div><div class="session-option-price">$55 / mo</div></div>
+      <div class="session-option active" data-price="120" onclick="selectSession(this)"><div class="session-option-icon">🔮</div><div class="session-option-name">Tarot Reading</div><div class="session-option-price">$120</div></div>
+      <div class="session-option" data-price="175" onclick="selectSession(this)"><div class="session-option-icon">⭐</div><div class="session-option-name">Birth Chart</div><div class="session-option-price">$175</div></div>
+      <div class="session-option" data-price="180" onclick="selectSession(this)"><div class="session-option-icon">✨</div><div class="session-option-name">Synastry</div><div class="session-option-price">$180</div></div>
+      <div class="session-option" data-price="200" onclick="selectSession(this)"><div class="session-option-icon">📦</div><div class="session-option-name">Triad Bundle</div><div class="session-option-price">$200</div></div>
+      <div class="session-option" data-price="95" onclick="selectSession(this)"><div class="session-option-icon">👥</div><div class="session-option-name">Group Session</div><div class="session-option-price">$95 / person</div></div>
+      <div class="session-option" data-price="55" onclick="selectSession(this)"><div class="session-option-icon">🌙</div><div class="session-option-name">Monthly Forecast</div><div class="session-option-price">$55</div></div>
+      <div class="session-option" data-price="150" onclick="selectSession(this)"><div class="session-option-icon">🌍</div><div class="session-option-name">Astrolocation</div><div class="session-option-price">$150</div></div>
     </div>
     <div class="form-row"><div class="form-group"><label class="form-label">Preferred Date</label><input type="date" class="form-input"></div><div class="form-group"><label class="form-label">Preferred Time</label><select class="form-select"><option value="">Select time...</option><option>Morning (9–12 AM)</option><option>Afternoon (12–5 PM)</option><option>Evening (5–9 PM)</option></select></div></div>
     <div class="form-row"><div class="form-group full"><label class="form-label">What brings you here? (Optional)</label><textarea class="form-textarea" placeholder="A question you're sitting with, a theme, or simply how you're feeling..."></textarea></div></div>
