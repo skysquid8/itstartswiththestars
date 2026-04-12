@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>It Starts With The Stars — Astrology & Tarot</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600;700&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --night:     #1e2740;   /* ← lightened further */
+  --deep:      #232e48;
+  --cosmos:    #2a3655;
+  --veil:      #303f60;
+  --surface:   #384669;
+  --gold:      #c9a84c;
+  --gold-lt:   #e8c97a;
+  --gold-pale: #f5e6b8;
+  --blush:     #e8a0bf;
+  --moon:      #d8e4ff;
+  --mist:      rgba(216,228,255,0.65);
+  --glow:      rgba(201,168,76,0.45);
+  --stardust:  rgba(201,168,76,0.12);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--night);color:var(--moon);font-family:'Jost',sans-serif;font-weight:300;overflow-x:hidden;cursor:none;}
+
+.cursor{width:10px;height:10px;background:var(--gold);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform 0.1s;mix-blend-mode:screen;}
+.cursor-ring{width:32px;height:32px;border:1px solid rgba(201,168,76,0.5);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all 0.15s ease;}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:1.4rem 4rem;background:linear-gradient(to bottom,rgba(30,39,64,0.94) 0%,transparent 100%);backdrop-filter:blur(6px);}
+.nav-logo{font-family:'Cinzel',serif;font-size:0.9rem;font-weight:600;letter-spacing:0.12em;color:var(--gold);text-decoration:none;text-transform:uppercase;}
+.nav-logo span{color:var(--moon);font-weight:400;}
+.nav-links{display:flex;gap:2.5rem;list-style:none;}
+.nav-links a{font-family:'Jost',sans-serif;font-size:0.72rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:rgba(216,228,255,0.6);text-decoration:none;transition:color 0.3s;}
+.nav-links a:hover{color:var(--gold-lt);}
+.nav-cta{font-family:'Jost',sans-serif;font-size:0.7rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--night);background:var(--gold);padding:0.55rem 1.4rem;text-decoration:none;transition:background 0.3s;}
+.nav-cta:hover{background:var(--gold-lt);}
+
+/* ═══ HERO ═══ */
+.hero{position:relative;width:100%;height:100vh;min-height:640px;overflow:hidden;}
+.hero-kailash{
+  position:absolute;inset:0;
+  background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Kailash_north.JPG/1280px-Kailash_north.JPG');
+  background-size:cover;background-position:center 40%;background-repeat:no-repeat;z-index:0;
+}
+.hero-kailash::after{
+  content:'';position:absolute;inset:0;
+  background:
+    linear-gradient(to bottom,rgba(30,39,64,0.48) 0%,rgba(30,39,64,0.12) 35%,rgba(30,39,64,0.62) 75%,var(--night) 100%),
+    linear-gradient(to right,rgba(30,39,64,0.22) 0%,transparent 35%,transparent 65%,rgba(30,39,64,0.22) 100%);
+}
+.hero-tint{position:absolute;inset:0;z-index:1;background:radial-gradient(ellipse at 50% 45%,rgba(201,168,76,0.07) 0%,transparent 60%);mix-blend-mode:screen;}
+#constellationCanvas{position:absolute;inset:0;width:100%;height:100%;z-index:2;cursor:none;}
+.hero-title{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);text-align:center;z-index:3;pointer-events:none;}
+.hero-eyebrow{font-family:'Jost',sans-serif;font-size:0.65rem;font-weight:500;letter-spacing:0.42em;text-transform:uppercase;color:var(--gold);margin-bottom:1.2rem;opacity:0;animation:fadeUp 1s 0.3s forwards;}
+.hero-title h1{font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,7vw,7.5rem);font-weight:300;line-height:0.92;letter-spacing:-0.01em;color:var(--gold-pale);text-shadow:0 2px 40px rgba(0,0,0,0.7);opacity:0;animation:fadeUp 1.2s 0.5s forwards;}
+.hero-title h1 em{display:block;font-style:italic;color:var(--gold-lt);}
+.hero-hint{margin-top:1.6rem;font-family:'Jost',sans-serif;font-size:0.62rem;letter-spacing:0.35em;text-transform:uppercase;color:rgba(201,168,76,0.62);opacity:0;animation:fadeUp 1s 1.4s forwards;}
+.hero-hint span{display:inline-block;animation:pulse-hint 2s ease-in-out 2s infinite;}
+.star-tooltip{position:absolute;z-index:10;background:rgba(30,39,64,0.94);border:1px solid rgba(201,168,76,0.4);padding:0.7rem 1.1rem;pointer-events:none;opacity:0;transition:opacity 0.2s;backdrop-filter:blur(10px);}
+.star-tooltip.visible{opacity:1;}
+.star-tooltip-label{font-family:'Cinzel',serif;font-size:0.72rem;letter-spacing:0.15em;color:var(--gold-pale);text-transform:uppercase;white-space:nowrap;}
+.star-tooltip-desc{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:0.85rem;color:var(--mist);margin-top:0.2rem;white-space:nowrap;}
+.star-tooltip-cta{font-family:'Jost',sans-serif;font-size:0.58rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);margin-top:0.4rem;}
+.photo-credit{position:absolute;bottom:5rem;right:1.5rem;z-index:4;font-size:0.52rem;letter-spacing:0.1em;color:rgba(216,228,255,0.22);text-transform:uppercase;}
+.scroll-down{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);z-index:4;display:flex;flex-direction:column;align-items:center;gap:0.4rem;opacity:0;animation:fadeUp 1s 2.2s forwards;}
+.scroll-down-line{width:1px;height:48px;background:linear-gradient(to bottom,transparent,var(--gold));animation:scroll-pulse 2s ease-in-out infinite;}
+
+/* ═══ Shared ═══ */
+section{position:relative;z-index:1;}
+.section-label{font-family:'Jost',sans-serif;font-size:0.62rem;font-weight:500;letter-spacing:0.45em;text-transform:uppercase;color:var(--gold);margin-bottom:0.8rem;}
+.section-title{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(2.4rem,4.5vw,4rem);line-height:1;color:var(--gold-pale);}
+.section-title em{font-style:italic;color:var(--gold-lt);}
+.divider{width:70px;height:1px;background:linear-gradient(to right,transparent,var(--gold),transparent);margin:1.8rem auto;}
+
+/* ═══ Daily Cosmic ═══ */
+.daily{padding:7rem 4rem;background:linear-gradient(to bottom,transparent,var(--deep) 15%,var(--deep) 85%,transparent);}
+.daily-inner{max-width:1200px;margin:0 auto;}
+.daily-header{text-align:center;margin-bottom:4.5rem;}
+
+/* Alert banner for imminent retrograde */
+.retro-alert{
+  display:flex;align-items:center;gap:1rem;
+  background:linear-gradient(135deg,rgba(201,168,76,0.12),rgba(201,168,76,0.04));
+  border:1px solid rgba(201,168,76,0.35);
+  padding:0.9rem 1.5rem;
+  margin-bottom:3rem;
+  max-width:1200px; margin-left:auto; margin-right:auto;
+}
+.retro-alert-icon{font-size:1.4rem;flex-shrink:0;}
+.retro-alert-text{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1rem;color:rgba(245,230,184,0.85);line-height:1.5;}
+.retro-alert-text strong{font-style:normal;font-family:'Cinzel',serif;font-size:0.75rem;letter-spacing:0.15em;color:var(--gold);display:block;margin-bottom:0.2rem;}
+
+.daily-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(201,168,76,0.12);border:1px solid rgba(201,168,76,0.12);}
+.daily-panel{background:var(--cosmos);padding:3rem;position:relative;overflow:hidden;transition:background 0.4s;}
+.daily-panel:hover{background:var(--veil);}
+.daily-panel::before{content:'';position:absolute;top:0;right:0;width:200px;height:200px;background:radial-gradient(circle at top right,rgba(201,168,76,0.06),transparent 70%);}
+.panel-icon{font-size:2.5rem;margin-bottom:1.2rem;display:block;filter:drop-shadow(0 0 10px var(--glow));}
+.panel-date{font-family:'Jost',sans-serif;font-size:0.62rem;letter-spacing:0.28em;text-transform:uppercase;color:var(--gold);margin-bottom:0.4rem;}
+.panel-sign{font-family:'Cinzel',serif;font-size:1.3rem;color:var(--gold-pale);margin-bottom:0.8rem;}
+.panel-body{font-family:'Cormorant Garamond',serif;font-size:1.05rem;line-height:1.8;color:rgba(216,228,255,0.72);font-style:italic;margin-bottom:1.5rem;}
+.panel-meta{font-family:'Jost',sans-serif;font-size:0.7rem;letter-spacing:0.1em;color:rgba(201,168,76,0.55);margin-bottom:1rem;}
+.panel-stars{display:flex;gap:3px;}
+.star-r{color:var(--gold);font-size:0.75rem;}
+.panel-time{display:inline-block;font-family:'Jost',sans-serif;font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--night);background:var(--gold);padding:0.18rem 0.6rem;margin-bottom:1rem;}
+
+/* Source credit */
+.source-credit{text-align:center;margin-top:2.5rem;}
+.source-credit a{font-family:'Jost',sans-serif;font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(201,168,76,0.45);text-decoration:none;transition:color 0.3s;}
+.source-credit a:hover{color:var(--gold);}
+
+/* ═══ Tarot Strip ═══ */
+.tarot-strip{padding:2rem 0;overflow:hidden;position:relative;}
+.tarot-track{display:flex;gap:1.5rem;animation:scroll-left 38s linear infinite;width:max-content;}
+.tarot-card{width:130px;height:220px;background:var(--veil);border:1px solid rgba(201,168,76,0.18);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.8rem;flex-shrink:0;position:relative;overflow:hidden;transition:transform 0.3s,border-color 0.3s;}
+.tarot-card:hover{transform:translateY(-8px);border-color:var(--gold);}
+.tarot-card-bg{position:absolute;inset:0;background:linear-gradient(135deg,rgba(201,168,76,0.06) 0%,transparent 50%);}
+.tarot-card-icon{font-size:2.2rem;position:relative;z-index:1;}
+.tarot-card-name{font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);text-align:center;position:relative;z-index:1;padding:0 0.8rem;}
+.tarot-strip::before,.tarot-strip::after{content:'';position:absolute;top:0;width:100px;height:100%;z-index:2;pointer-events:none;}
+.tarot-strip::before{left:0;background:linear-gradient(to right,var(--night),transparent);}
+.tarot-strip::after{right:0;background:linear-gradient(to left,var(--night),transparent);}
+
+/* ═══ Services ═══ */
+.services{padding:7rem 4rem;max-width:1200px;margin:0 auto;}
+.services-header{text-align:center;margin-bottom:4.5rem;}
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;}
+.service-card{background:var(--cosmos);border:1px solid rgba(201,168,76,0.1);padding:2.5rem 2rem;position:relative;overflow:hidden;transition:all 0.4s;cursor:none;}
+.service-card:hover{border-color:rgba(201,168,76,0.38);transform:translateY(-4px);box-shadow:0 20px 50px rgba(0,0,0,0.3);}
+.service-card.featured{background:linear-gradient(135deg,rgba(201,168,76,0.1) 0%,var(--cosmos) 50%);border-color:rgba(201,168,76,0.3);}
+.service-badge{font-family:'Jost',sans-serif;font-size:0.58rem;letter-spacing:0.28em;text-transform:uppercase;color:var(--night);background:var(--gold);padding:0.28rem 0.75rem;display:inline-block;margin-bottom:1.3rem;}
+.service-icon{font-size:2.2rem;display:block;margin-bottom:1.2rem;filter:drop-shadow(0 0 8px rgba(201,168,76,0.28));}
+.service-name{font-family:'Cinzel',serif;font-size:0.92rem;font-weight:600;color:var(--gold-pale);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.4rem;}
+.service-tagline{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:0.95rem;color:rgba(216,228,255,0.55);margin-bottom:1.2rem;}
+.service-desc{font-size:0.82rem;line-height:1.8;color:rgba(216,228,255,0.5);margin-bottom:1.5rem;}
+.service-price{font-family:'Cinzel',serif;font-size:1.7rem;color:var(--gold);margin-bottom:0.2rem;}
+.service-price-note{font-size:0.68rem;letter-spacing:0.15em;color:rgba(216,228,255,0.35);text-transform:uppercase;margin-bottom:1.5rem;}
+.service-features{list-style:none;margin-bottom:2rem;}
+.service-features li{font-size:0.8rem;color:rgba(216,228,255,0.55);padding:0.35rem 0;border-bottom:1px solid rgba(201,168,76,0.07);display:flex;align-items:center;gap:0.7rem;}
+.service-features li::before{content:'✦';color:var(--gold);font-size:0.48rem;flex-shrink:0;}
+.btn-service{width:100%;font-family:'Jost',sans-serif;font-size:0.68rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;padding:0.85rem;border:1px solid rgba(201,168,76,0.38);color:var(--gold);background:transparent;cursor:none;transition:all 0.3s;text-align:center;display:block;text-decoration:none;}
+.btn-service:hover{background:var(--gold);color:var(--night);}
+.service-card.featured .btn-service{background:var(--gold);color:var(--night);border-color:var(--gold);}
+.service-card.featured .btn-service:hover{background:var(--gold-lt);}
+
+/* ═══ Parties ═══ */
+.parties{padding:7rem 4rem;background:linear-gradient(to bottom,transparent,var(--deep),transparent);}
+.parties-inner{max-width:1200px;margin:0 auto;}
+.parties-layout{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;margin-top:4.5rem;}
+.parties-lead{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-style:italic;line-height:1.8;color:rgba(216,228,255,0.72);margin:1.3rem 0 2rem;}
+.party-options{display:flex;flex-direction:column;gap:0.8rem;margin-bottom:2.5rem;}
+.party-option{display:flex;gap:1.2rem;align-items:flex-start;padding:1.3rem;background:rgba(201,168,76,0.04);border:1px solid rgba(201,168,76,0.1);transition:all 0.3s;cursor:none;}
+.party-option:hover{background:rgba(201,168,76,0.07);border-color:rgba(201,168,76,0.28);}
+.party-option-icon{font-size:1.6rem;flex-shrink:0;margin-top:0.15rem;}
+.party-option-name{font-family:'Cinzel',serif;font-size:0.8rem;color:var(--gold-pale);letter-spacing:0.08em;margin-bottom:0.25rem;}
+.party-option-desc{font-size:0.8rem;color:rgba(216,228,255,0.48);line-height:1.6;}
+.party-option-price{font-family:'Cinzel',serif;color:var(--gold);font-size:0.85rem;margin-top:0.35rem;}
+.moon-circle{width:380px;height:380px;border-radius:50%;border:1px solid rgba(201,168,76,0.18);display:flex;align-items:center;justify-content:center;position:relative;margin:0 auto;}
+.moon-circle::before{content:'';position:absolute;inset:18px;border-radius:50%;border:1px solid rgba(201,168,76,0.08);}
+.moon-inner{width:260px;height:260px;border-radius:50%;background:radial-gradient(circle at 35% 35%,rgba(201,168,76,0.22),rgba(201,168,76,0.04) 60%,transparent);border:1px solid rgba(201,168,76,0.22);display:flex;align-items:center;justify-content:center;font-size:7rem;}
+.orbit-dot{position:absolute;width:7px;height:7px;border-radius:50%;background:var(--gold);filter:drop-shadow(0 0 5px var(--gold));}
+.o1{animation:orbit 8s linear infinite;transform-origin:190px 190px;}
+.o2{animation:orbit 13s linear infinite reverse;transform-origin:190px 190px;width:5px;height:5px;opacity:0.6;}
+.o3{animation:orbit 22s linear infinite;transform-origin:190px 190px;width:4px;height:4px;background:var(--blush);}
+
+/* ═══ Booking ═══ */
+.booking{padding:7rem 4rem;max-width:900px;margin:0 auto;}
+.booking-header{text-align:center;margin-bottom:4.5rem;}
+.booking-form{background:var(--cosmos);border:1px solid rgba(201,168,76,0.14);padding:3.5rem;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1.3rem;margin-bottom:1.3rem;}
+.form-group{display:flex;flex-direction:column;gap:0.45rem;}
+.form-group.full{grid-column:1/-1;}
+.form-label{font-family:'Jost',sans-serif;font-size:0.62rem;font-weight:500;letter-spacing:0.24em;text-transform:uppercase;color:rgba(201,168,76,0.65);}
+.form-input,.form-select,.form-textarea{background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.14);color:var(--moon);font-family:'Jost',sans-serif;font-size:0.88rem;padding:0.8rem 1rem;outline:none;transition:border-color 0.3s,background 0.3s;-webkit-appearance:none;cursor:none;}
+.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:rgba(201,168,76,0.45);background:rgba(201,168,76,0.04);}
+.form-select option{background:var(--deep);}
+.form-textarea{resize:none;height:90px;}
+.session-picker{display:grid;grid-template-columns:repeat(3,1fr);gap:0.8rem;margin-bottom:1.8rem;}
+.session-option{border:1px solid rgba(201,168,76,0.14);padding:1.1rem;text-align:center;cursor:none;transition:all 0.3s;position:relative;}
+.session-option:hover,.session-option.active{border-color:var(--gold);background:rgba(201,168,76,0.07);}
+.session-option.active::after{content:'✦';position:absolute;top:0.4rem;right:0.5rem;color:var(--gold);font-size:0.55rem;}
+.session-option-icon{font-size:1.4rem;margin-bottom:0.4rem;}
+.session-option-name{font-family:'Cinzel',serif;font-size:0.6rem;color:var(--gold-pale);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.2rem;}
+.session-option-price{font-size:0.78rem;color:var(--gold);font-family:'Cormorant Garamond',serif;}
+.payment-area{border-top:1px solid rgba(201,168,76,0.1);padding-top:1.8rem;margin-top:1.8rem;}
+.payment-title{font-family:'Cinzel',serif;font-size:0.75rem;letter-spacing:0.2em;color:var(--gold);margin-bottom:1.3rem;text-transform:uppercase;}
+.card-icons{display:flex;gap:0.6rem;margin-bottom:1.3rem;}
+.card-icon{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);padding:0.3rem 0.55rem;font-size:0.62rem;letter-spacing:0.08em;color:rgba(216,228,255,0.38);}
+.total-row{display:flex;justify-content:space-between;align-items:center;padding:1.3rem 0;border-top:1px solid rgba(201,168,76,0.1);margin:1.3rem 0;}
+.total-label{font-family:'Jost',sans-serif;font-size:0.68rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(216,228,255,0.45);}
+.total-amount{font-family:'Cinzel',serif;font-size:1.7rem;color:var(--gold);}
+.btn-book{width:100%;font-family:'Cinzel',serif;font-size:0.82rem;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--night);background:var(--gold);padding:1.1rem;border:none;cursor:none;transition:all 0.3s;}
+.btn-book:hover{background:var(--gold-lt);transform:translateY(-2px);box-shadow:0 10px 28px rgba(201,168,76,0.18);}
+
+/* ═══ Testimonials ═══ */
+.testimonials{padding:7rem 4rem;background:linear-gradient(to bottom,transparent,var(--deep),transparent);}
+.testimonials-inner{max-width:1100px;margin:0 auto;}
+.testimonials-header{text-align:center;margin-bottom:4.5rem;}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;}
+.testi-card{background:var(--cosmos);border:1px solid rgba(201,168,76,0.09);padding:2.2rem;position:relative;overflow:hidden;transition:all 0.3s;}
+.testi-card:hover{border-color:rgba(201,168,76,0.28);}
+.testi-glyph{position:absolute;top:-10px;right:1.3rem;font-size:5.5rem;color:rgba(201,168,76,0.04);font-family:'Cinzel',serif;line-height:1;pointer-events:none;}
+.testi-stars{color:var(--gold);font-size:0.72rem;letter-spacing:0.18em;margin-bottom:1rem;}
+.testi-quote{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1rem;line-height:1.8;color:rgba(216,228,255,0.68);margin-bottom:1.7rem;}
+.testi-author{font-family:'Cinzel',serif;font-size:0.67rem;color:var(--gold);letter-spacing:0.14em;text-transform:uppercase;}
+.testi-sign{font-family:'Jost',sans-serif;font-size:0.67rem;color:rgba(216,228,255,0.33);margin-top:0.2rem;}
+
+/* ═══ Footer ═══ */
+footer{padding:5rem 4rem 2.5rem;border-top:1px solid rgba(201,168,76,0.08);position:relative;z-index:1;}
+.footer-inner{max-width:1200px;margin:0 auto;}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:4rem;margin-bottom:4rem;}
+.footer-brand-name{font-family:'Cinzel',serif;font-size:1rem;color:var(--gold);letter-spacing:0.1em;margin-bottom:0.8rem;}
+.footer-brand-desc{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:0.95rem;line-height:1.8;color:rgba(216,228,255,0.42);margin-bottom:1.3rem;}
+.footer-social{display:flex;gap:0.7rem;}
+.social-btn{width:34px;height:34px;border:1px solid rgba(201,168,76,0.18);display:flex;align-items:center;justify-content:center;font-size:0.75rem;color:rgba(216,228,255,0.38);text-decoration:none;transition:all 0.3s;}
+.social-btn:hover{border-color:var(--gold);color:var(--gold);}
+.footer-col-title{font-family:'Cinzel',serif;font-size:0.65rem;color:var(--gold);letter-spacing:0.25em;text-transform:uppercase;margin-bottom:1.3rem;}
+.footer-links{list-style:none;display:flex;flex-direction:column;gap:0.7rem;}
+.footer-links a{font-size:0.8rem;color:rgba(216,228,255,0.38);text-decoration:none;transition:color 0.3s;}
+.footer-links a:hover{color:var(--gold-lt);}
+.footer-bottom{border-top:1px solid rgba(201,168,76,0.06);padding-top:1.8rem;display:flex;justify-content:space-between;align-items:center;}
+.footer-copy{font-size:0.68rem;color:rgba(216,228,255,0.22);letter-spacing:0.1em;}
+.footer-tagline{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:0.85rem;color:rgba(201,168,76,0.32);}
+
+.btn-primary{font-family:'Jost',sans-serif;font-size:0.72rem;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:var(--night);background:var(--gold);padding:0.95rem 2.2rem;text-decoration:none;border:none;cursor:none;transition:all 0.3s;display:inline-block;}
+.btn-primary:hover{background:var(--gold-lt);transform:translateY(-2px);}
+
+.modal-overlay{display:none;position:fixed;inset:0;z-index:1000;background:rgba(30,39,64,0.9);align-items:center;justify-content:center;backdrop-filter:blur(8px);}
+.modal-overlay.open{display:flex;}
+.modal{background:var(--cosmos);border:1px solid rgba(201,168,76,0.22);padding:2.8rem;max-width:460px;width:90%;position:relative;animation:fadeUp 0.35s forwards;}
+.modal-close{position:absolute;top:1rem;right:1.3rem;background:none;border:none;cursor:none;color:rgba(216,228,255,0.38);font-size:1.1rem;transition:color 0.3s;}
+.modal-close:hover{color:var(--gold);}
+.modal-title{font-family:'Cinzel',serif;font-size:1.1rem;color:var(--gold-pale);margin-bottom:0.4rem;}
+.modal-body{font-size:0.83rem;line-height:1.8;color:rgba(216,228,255,0.58);}
+
+.reveal{opacity:0;transform:translateY(36px);transition:opacity 0.8s ease,transform 0.8s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.reveal-delay-1{transition-delay:0.1s;}
+.reveal-delay-2{transition-delay:0.2s;}
+.reveal-delay-3{transition-delay:0.3s;}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:translateY(0);}}
+@keyframes scroll-left{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+@keyframes orbit{from{transform:rotate(0deg) translateX(190px) rotate(0deg);}to{transform:rotate(360deg) translateX(190px) rotate(-360deg);}}
+@keyframes scroll-pulse{0%,100%{opacity:0.3;}50%{opacity:1;}}
+@keyframes pulse-hint{0%,100%{opacity:0.5;transform:translateY(0);}50%{opacity:1;transform:translateY(3px);}}
+
+@media(max-width:900px){
+  nav{padding:1.1rem 1.5rem;}
+  .nav-links{display:none;}
+  .daily-grid,.services-grid,.testi-grid{grid-template-columns:1fr;}
+  .parties-layout{grid-template-columns:1fr;}
+  .parties-visual{display:none;}
+  .footer-top{grid-template-columns:1fr 1fr;gap:2rem;}
+  .form-row{grid-template-columns:1fr;}
+  .session-picker{grid-template-columns:1fr;}
+  .daily,.services,.parties,.booking,.testimonials{padding:5rem 1.5rem;}
+  .booking-form{padding:2rem;}
+  .hero-title h1{font-size:clamp(2.5rem,11vw,5rem);}
+}
+</style>
+</head>
+<body>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">It Starts<span> With The Stars</span></a>
+  <ul class="nav-links">
+    <li><a href="#daily">Daily Cosmic</a></li>
+    <li><a href="#services">Sessions</a></li>
+    <li><a href="#parties">Gatherings</a></li>
+    <li><a href="#booking">Book Now</a></li>
+  </ul>
+  <a href="#booking" class="nav-cta">Book a Reading</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-kailash"></div>
+  <div class="hero-tint"></div>
+  <canvas id="constellationCanvas"></canvas>
+  <div class="hero-title">
+    <p class="hero-eyebrow">✦ Astrology · Tarot · Cosmic Guidance ✦</p>
+    <h1>It Starts<em>With The Stars</em></h1>
+    <p class="hero-hint"><span>✦ &nbsp; Click a star to begin &nbsp; ✦</span></p>
+  </div>
+  <div class="star-tooltip" id="starTooltip">
+    <p class="star-tooltip-label" id="tooltipLabel">–</p>
+    <p class="star-tooltip-desc" id="tooltipDesc">–</p>
+    <p class="star-tooltip-cta">Click to explore →</p>
+  </div>
+  <p class="photo-credit">Mount Kailash, Tibet · CC BY 2.5 Ondřej Žváček</p>
+  <div class="scroll-down"><div class="scroll-down-line"></div></div>
+</section>
+
+<!-- DAILY COSMIC -->
+<section class="daily" id="daily">
+  <div class="daily-inner">
+    <div class="daily-header reveal">
+      <p class="section-label">✦ Daily Cosmic Weather</p>
+      <h2 class="section-title">The Heavens on <em>Sunday, Feb 22</em></h2>
+      <div class="divider"></div>
+      <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.05rem;color:rgba(216,228,255,0.5);max-width:560px;margin:0 auto;">
+        Moon in Taurus · Waxing Crescent · No Void Period Today<br>
+        Sun in Pisces · Saturn newly in Aries · Jupiter Rx in Cancer
+      </p>
+    </div>
+
+    <!-- Mercury retrograde warning -->
+    <div class="retro-alert reveal">
+      <span class="retro-alert-icon">☿</span>
+      <p class="retro-alert-text">
+        <strong>⚠ Mercury Retrograde begins February 25 · Pacific Time</strong>
+        Three days from now Mercury stations retrograde at 22° Pisces. Back up devices, delay signing contracts if you can, and give communications extra patience. Pre-shadow effects are already felt — review carefully before hitting send.
+      </p>
+    </div>
+
+    <div class="daily-grid reveal">
+
+      <!-- Panel 1: Moon in Taurus -->
+      <div class="daily-panel">
+        <span class="panel-icon">☽</span>
+        <p class="panel-date">Today's Moon · Pacific Time</p>
+        <p class="panel-sign">Taurus — Grounding &amp; Pleasure</p>
+        <p class="panel-body">The Moon settles into Taurus all day with no void period — a rarity that makes today unusually reliable for intention-setting and practical action. Taurus Moon calls us toward beauty, stillness, and the body. Slow down. Touch something real. The earth element asks: what are you actually building? Plant a seed today and it will hold.</p>
+        <p class="panel-meta">Moon enters Gemini tomorrow · No void window today — a full green-light day</p>
+        <div class="panel-stars"><span class="star-r">★</span><span class="star-r">★</span><span class="star-r">★</span><span class="star-r">★</span><span class="star-r">★</span></div>
+      </div>
+
+      <!-- Panel 2: Venus trine Jupiter Rx (exact today at 12:02pm PT) -->
+      <div class="daily-panel">
+        <span class="panel-icon">♀</span>
+        <p class="panel-date">Peak Aspect · 12:02 pm PT</p>
+        <p class="panel-sign">Venus ♀ Trine Jupiter Rx ♃</p>
+        <span class="panel-time">Exact 12:02 pm Pacific</span>
+        <p class="panel-body">Venus at 15° Pisces forms an exact trine to Jupiter Rx at 15° Cancer — the most beautiful aspect in the sky today and one of the most generous of the year. Heart-opening, abundance-inviting energy. Creative work initiated now carries unusual grace. Conversations about money, love, or beauty find easy flow. Jupiter retrograde asks: are you receiving what's already available to you?</p>
+        <p class="panel-meta">Venus in Pisces · Jupiter Rx in Cancer · Water trine — flowing, receptive, fertile</p>
+        <div class="panel-stars"><span class="star-r">★</span><span class="star-r">★</span><span class="star-r">★</span><span class="star-r">★</span><span class="star-r">★</span></div>
+      </div>
+
+      <!-- Panel 3: Saturn conjunct Neptune aftermath (Feb 20) -->
+      <div class="daily-panel">
+        <span class="panel-icon">♄</span>
+        <p class="panel-date">Major Transit Aftermath · Feb 20</p>
+        <p class="panel-sign">Saturn ♄ Conjunct Neptune ♆ in Aries</p>
+        <p class="panel-body">Two days ago Saturn met Neptune at 0° Aries — a conjunction that happens once every 36 years. We are still inside its reverb. The dreamer and the realist fused at the very first degree of Aries, the point of new beginnings. What vision are you being asked to make real? What illusion is dissolving into something more honest? This is the axis of sacred responsibility.</p>
+        <p class="panel-meta">Exact Feb 20 · Still within 2° orb — deeply active energy</p>
+        <div class="panel-stars"><span class="star-r">★</span><span class="star-r">★</span><span class="star-r">★</span><span class="star-r">★</span><span class="star-r" style="opacity:0.3">★</span></div>
+      </div>
+
+      <!-- Panel 4: Today's Tarot Pull -->
+      <div class="daily-panel">
+        <span class="panel-icon">🂠</span>
+        <p class="panel-date">Today's Tarot · Daily Draw</p>
+        <p class="panel-sign">The Empress — III</p>
+        <p class="panel-body">With Venus trining Jupiter and the Moon in sensual Taurus, The Empress arrives exactly right. She is abundance embodied — creative power, fertile ground, the body as sacred. She asks you to stop striving and start receiving. What is ready to bloom if you stop forcing it? Today favors the arts, nature, pleasure without guilt, and trusting that growth happens even when you are not watching.</p>
+        <p class="panel-meta">Venus rules both Taurus and The Empress — a doubled invitation today</p>
+        <div class="panel-stars"><span class="star-r">★</span><span class="star-r">★</span><span class="star-r">★</span><span class="star-r">★</span><span class="star-r">★</span></div>
+      </div>
+
+    </div>
+
+    <div class="source-credit">
+      <a href="https://www.llewellyn.com/product.php?ean=9780738775173" target="_blank" rel="noopener">
+        ✦ Planetary timing referenced from Llewellyn's 2026 Daily Planetary Guide · Pacific Time ✦
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<!-- TAROT STRIP -->
+<div class="tarot-strip">
+  <div class="tarot-track">
+    <div class="tarot-card"><div class="tarot-card-bg"></div><span class="tarot-card-icon">🌟</span><span class="tarot-card-name">The Star</span></div>
+    <div class="tarot-card"><div class="tarot-card-bg"></div><span class="tarot-card-icon">🌙</span><span class="tarot-card-name">The Moon</span></div>
+    <div class="tarot-card"><div class="tarot-card-bg"></div><span class="tarot-card-icon">☀️</span><span class="tarot-card-name">The Sun</span></div>
+    <div class="tarot-card"><div class="tarot-card-bg"></div><span class="tarot-card-icon">⚡</span><span class="tarot-card-name">The Tower</span></div>
+    <div class="tarot-card"><div class="tarot-card-bg"></div><span class="tarot-card-icon">⚖️</span><span class="tarot-card-name">Justice</span></div>
+    <div class="tarot-card"><div class="tarot-card-bg"></div><span class="tarot-card-icon">🌹</span><span class="tarot-card-name">The Lovers</span></div>
+    <div class="tarot-card"><div class="tarot-card-bg"></div><span class="tarot-card-icon">🔮</span><span class="tarot-card-name">High Priestess</span></div>
+    <div class="tarot-card"><div class="tarot-card-bg"></div><span class="tarot-card-icon">🏆</span><span class="tarot-card-name">The World</span></div>
+    <div class="tarot-card"><div class="tarot-card-bg"></div><span class="tarot-card-icon">🦁</span><span class="tarot-card-name">Strength</span></div>
+    <div class="tarot-card"><div class="tarot-card-bg"></div><span class="tarot-card-icon">👑</span><span class="tarot-card-name">The Empress</span></div>
+    <div class="tarot-card"><div class="tarot-card-bg"></div><span class="tarot-card-icon">🌟</span><span class="tarot-card-name">The Star</span></div>
+    <div class="tarot-card"><div class="tarot-card-bg"></div><span class="tarot-card-icon">🌙</span><span class="tarot-card-name">The Moon</span></div>
+    <div class="tarot-card"><div class="tarot-card-bg"></div><span class="tarot-card-icon">☀️</span><span class="tarot-card-name">The Sun</span></div>
+    <div class="tarot-card"><div class="tarot-card-bg"></div><span class="tarot-card-icon">⚡</span><span class="tarot-card-name">The Tower</span></div>
+    <div class="tarot-card"><div class="tarot-card-bg"></div><span class="tarot-card-icon">⚖️</span><span class="tarot-card-name">Justice</span></div>
+    <div class="tarot-card"><div class="tarot-card-bg"></div><span class="tarot-card-icon">🌹</span><span class="tarot-card-name">The Lovers</span></div>
+    <div class="tarot-card"><div class="tarot-card-bg"></div><span class="tarot-card-icon">🔮</span><span class="tarot-card-name">High Priestess</span></div>
+    <div class="tarot-card"><div class="tarot-card-bg"></div><span class="tarot-card-icon">🏆</span><span class="tarot-card-name">The World</span></div>
+    <div class="tarot-card"><div class="tarot-card-bg"></div><span class="tarot-card-icon">🦁</span><span class="tarot-card-name">Strength</span></div>
+    <div class="tarot-card"><div class="tarot-card-bg"></div><span class="tarot-card-icon">👑</span><span class="tarot-card-name">The Empress</span></div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="services-header reveal">
+    <p class="section-label">✦ Sessions &amp; Offerings</p>
+    <h2 class="section-title">Choose Your <em>Cosmic Journey</em></h2>
+    <div class="divider"></div>
+  </div>
+  <div class="services-grid">
+    <div class="service-card reveal reveal-delay-1">
+      <span class="service-icon">🔮</span>
+      <p class="service-name">Tarot Reading</p>
+      <p class="service-tagline">The cards reveal what the heart already knows</p>
+      <p class="service-desc">A focused 60-minute tarot session exploring your current energies, a specific question, or a full Celtic Cross spread for an aerial view of your path.</p>
+      <p class="service-price">$120</p>
+      <p class="service-price-note">60-minute private session</p>
+      <ul class="service-features"><li>One-on-one via Zoom or in person</li><li>Recorded session sent to you</li><li>Written card summary</li><li>Follow-up Q&amp;A (48 hrs)</li></ul>
+      <a href="#booking" class="btn-service">Book Reading</a>
+    </div>
+    <div class="service-card featured reveal reveal-delay-2">
+      <span class="service-badge">Most Popular</span>
+      <span class="service-icon">⭐</span>
+      <p class="service-name">Birth Chart Deep Dive</p>
+      <p class="service-tagline">The full map of who you came here to be</p>
+      <p class="service-desc">A comprehensive 90-minute natal chart analysis — sun, moon, rising, planetary placements, aspects, and life timing through progressions and transits.</p>
+      <p class="service-price">$220</p>
+      <p class="service-price-note">90-minute private session</p>
+      <ul class="service-features"><li>Complete natal chart analysis</li><li>Current transits &amp; year ahead</li><li>PDF chart + written report</li><li>Recording + 7-day follow-up</li></ul>
+      <a href="#booking" class="btn-service">Book Deep Dive</a>
+    </div>
+    <div class="service-card reveal reveal-delay-3">
+      <span class="service-icon">✨</span>
+      <p class="service-name">Relationship Synastry</p>
+      <p class="service-tagline">Why you found each other — and what it means</p>
+      <p class="service-desc">A 90-minute synastry and composite chart reading for couples or business partners. Understand your connection at the cosmic level.</p>
+      <p class="service-price">$280</p>
+      <p class="service-price-note">90 min · two charts</p>
+      <ul class="service-features"><li>Synastry + composite charts</li><li>Compatibility themes &amp; gifts</li><li>Karmic patterns &amp; lessons</li><li>Both parties may attend</li></ul>
+      <a href="#booking" class="btn-service">Book Synastry</a>
+    </div>
+    <div class="service-card reveal">
+      <span class="service-icon">📦</span>
+      <p class="service-name">Bundle: The Trilogy</p>
+      <p class="service-tagline">Past · Present · Future — the full picture</p>
+      <p class="service-desc">Three sessions across 90 days: natal chart, midpoint tarot check-in, and a forward-looking solar return reading. The most transformative offering.</p>
+      <p class="service-price">$480</p>
+      <p class="service-price-note">3 sessions · save $80</p>
+      <ul class="service-features"><li>Natal deep dive (90 min)</li><li>Midpoint tarot check-in (45 min)</li><li>Solar return + year ahead (60 min)</li><li>Priority scheduling</li></ul>
+      <a href="#booking" class="btn-service">Book Bundle</a>
+    </div>
+    <div class="service-card reveal reveal-delay-1">
+      <span class="service-icon">👥</span>
+      <p class="service-name">Group Session</p>
+      <p class="service-tagline">Cosmic wisdom, shared</p>
+      <p class="service-desc">A 2-hour group reading for up to 8 people. Each participant gets a mini personal reading plus a group tarot spread for the collective energy.</p>
+      <p class="service-price">$95</p>
+      <p class="service-price-note">per person · min 4 guests</p>
+      <ul class="service-features"><li>Up to 8 participants</li><li>Individual mini-readings</li><li>Group tarot spread</li><li>Virtual or in-person</li></ul>
+      <a href="#booking" class="btn-service">Book Group</a>
+    </div>
+    <div class="service-card reveal reveal-delay-2">
+      <span class="service-icon">🌙</span>
+      <p class="service-name">Monthly Membership</p>
+      <p class="service-tagline">Stay aligned, all year long</p>
+      <p class="service-desc">Monthly new moon intentions, full moon release tarot, private community access, and 20% off all individual sessions.</p>
+      <p class="service-price">$55</p>
+      <p class="service-price-note">per month · cancel anytime</p>
+      <ul class="service-features"><li>2 group ceremonies/month</li><li>Private community access</li><li>Monthly cosmic newsletter</li><li>20% off all 1:1 sessions</li></ul>
+      <a href="#booking" class="btn-service">Join Circle</a>
+    </div>
+  </div>
+</section>
+
+<!-- PARTIES -->
+<section class="parties" id="parties">
+  <div class="parties-inner">
+    <div class="reveal" style="text-align:center">
+      <p class="section-label">✦ Cosmic Gatherings</p>
+      <h2 class="section-title">Tarot &amp; Stars <em>for Your Next Party</em></h2>
+      <div class="divider"></div>
+    </div>
+    <div class="parties-layout">
+      <div class="parties-text reveal">
+        <p class="parties-lead">Imagine a dinner party where the conversation goes deeper than small talk — because the stars are guiding it. Tarot at your table turns any gathering into an unforgettable evening.</p>
+        <div class="party-options">
+          <div class="party-option"><span class="party-option-icon">🍽️</span><div><p class="party-option-name">The Dinner Party Experience</p><p class="party-option-desc">2–3 hours of readings woven through a multi-course evening. Guests drop in for private mini-readings between courses.</p><p class="party-option-price">Starting at $450 · up to 12 guests</p></div></div>
+          <div class="party-option"><span class="party-option-icon">🥂</span><div><p class="party-option-name">Cocktail Party Tarot</p><p class="party-option-desc">Perfect for birthdays, bachelorettes, and holiday parties. 3-hour event with tarot, astrology Q&amp;A, and a group party spread.</p><p class="party-option-price">Starting at $550 · up to 20 guests</p></div></div>
+          <div class="party-option"><span class="party-option-icon">🎂</span><div><p class="party-option-name">Birthday Solar Return</p><p class="party-option-desc">A special reading mapping the entire year ahead. The ideal centerpiece of a birthday gathering — a gift that lasts all year.</p><p class="party-option-price">$185 · birthday person only</p></div></div>
+          <div class="party-option"><span class="party-option-icon">🏢</span><div><p class="party-option-name">Corporate &amp; Team Events</p><p class="party-option-desc">Astrology as a team-building lens — collective energy, communication styles, and how planetary cycles map to project timelines.</p><p class="party-option-price">Custom pricing · contact to inquire</p></div></div>
+        </div>
+        <a href="#booking" class="btn-primary">Inquire About a Gathering</a>
+      </div>
+      <div class="parties-visual reveal">
+        <div class="moon-circle">
+          <div class="moon-inner">🌕</div>
+          <div class="orbit-dot o1" style="top:190px;left:0;"></div>
+          <div class="orbit-dot o2" style="top:190px;left:0;"></div>
+          <div class="orbit-dot o3" style="top:190px;left:0;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING -->
+<section class="booking" id="booking">
+  <div class="booking-header reveal">
+    <p class="section-label">✦ Reserve Your Session</p>
+    <h2 class="section-title">Book Your <em>Reading</em></h2>
+    <div class="divider"></div>
+    <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.05rem;color:rgba(216,228,255,0.5);max-width:480px;margin:0 auto;">All sessions confirmed within 24 hours. Secure payment via Stripe.</p>
+  </div>
+  <div class="booking-form reveal">
+    <div class="form-row"><div class="form-group"><label class="form-label">First Name</label><input type="text" class="form-input" placeholder="Your first name"></div><div class="form-group"><label class="form-label">Last Name</label><input type="text" class="form-input" placeholder="Your last name"></div></div>
+    <div class="form-row"><div class="form-group"><label class="form-label">Email</label><input type="email" class="form-input" placeholder="your@email.com"></div><div class="form-group"><label class="form-label">Date of Birth</label><input type="date" class="form-input"></div></div>
+    <div class="form-row"><div class="form-group"><label class="form-label">Birth Time (if known)</label><input type="time" class="form-input"></div><div class="form-group"><label class="form-label">Birth City</label><input type="text" class="form-input" placeholder="City, Country"></div></div>
+    <p class="form-label" style="margin-bottom:0.9rem;">Select Your Session</p>
+    <div class="session-picker" id="sessionPicker">
+      <div class="session-option active" data-price="120" onclick="selectSession(this)"><div class="session-option-icon">🔮</div><div class="session-option-name">Tarot Reading</div><div class="session-option-price">$120</div></div>
+      <div class="session-option" data-price="220" onclick="selectSession(this)"><div class="session-option-icon">⭐</div><div class="session-option-name">Birth Chart</div><div class="session-option-price">$220</div></div>
+      <div class="session-option" data-price="280" onclick="selectSession(this)"><div class="session-option-icon">✨</div><div class="session-option-name">Synastry</div><div class="session-option-price">$280</div></div>
+      <div class="session-option" data-price="480" onclick="selectSession(this)"><div class="session-option-icon">📦</div><div class="session-option-name">Trilogy Bundle</div><div class="session-option-price">$480</div></div>
+      <div class="session-option" data-price="95" onclick="selectSession(this)"><div class="session-option-icon">👥</div><div class="session-option-name">Group Session</div><div class="session-option-price">$95 / person</div></div>
+      <div class="session-option" data-price="55" onclick="selectSession(this)"><div class="session-option-icon">🌙</div><div class="session-option-name">Monthly Circle</div><div class="session-option-price">$55 / mo</div></div>
+    </div>
+    <div class="form-row"><div class="form-group"><label class="form-label">Preferred Date</label><input type="date" class="form-input"></div><div class="form-group"><label class="form-label">Preferred Time</label><select class="form-select"><option value="">Select time...</option><option>Morning (9–12 AM)</option><option>Afternoon (12–5 PM)</option><option>Evening (5–9 PM)</option></select></div></div>
+    <div class="form-row"><div class="form-group full"><label class="form-label">What brings you here? (Optional)</label><textarea class="form-textarea" placeholder="A question you're sitting with, a theme, or simply how you're feeling..."></textarea></div></div>
+    <div class="payment-area">
+      <p class="payment-title">✦ Secure Checkout</p>
+      <div class="card-icons"><span class="card-icon">VISA</span><span class="card-icon">MC</span><span class="card-icon">AMEX</span><span class="card-icon">APPLE PAY</span><span class="card-icon">VENMO</span></div>
+      <div class="form-row"><div class="form-group full"><label class="form-label">Card Number</label><input type="text" class="form-input" placeholder="•••• •••• •••• ••••"></div></div>
+      <div class="form-row"><div class="form-group"><label class="form-label">Expiry</label><input type="text" class="form-input" placeholder="MM / YY"></div><div class="form-group"><label class="form-label">CVC</label><input type="text" class="form-input" placeholder="•••"></div></div>
+      <div class="total-row"><span class="total-label">Session Total</span><span class="total-amount" id="totalAmount">$120</span></div>
+      <button class="btn-book" onclick="showConfirmation()">✦ Confirm &amp; Book Session</button>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="testimonials-inner">
+    <div class="testimonials-header reveal">
+      <p class="section-label">✦ From the Community</p>
+      <h2 class="section-title">What the <em>Stars Revealed</em></h2>
+      <div class="divider"></div>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card reveal"><div class="testi-glyph">☽</div><div class="testi-stars">★★★★★</div><p class="testi-quote">She described exactly what I'd been feeling for months in a way I couldn't articulate myself. I left that session knowing what to do next.</p><p class="testi-author">Maya R.</p><p class="testi-sign">Scorpio Rising · Birth Chart Deep Dive</p></div>
+      <div class="testi-card reveal reveal-delay-1"><div class="testi-glyph">✦</div><div class="testi-stars">★★★★★</div><p class="testi-quote">We had tarot at our dinner party and it was the most memorable evening any of us could remember. People are still talking about their readings six months later.</p><p class="testi-author">Simone &amp; Friends</p><p class="testi-sign">Dinner Party · 11 Guests</p></div>
+      <div class="testi-card reveal reveal-delay-2"><div class="testi-glyph">☿</div><div class="testi-stars">★★★★★</div><p class="testi-quote">The Trilogy Bundle changed how I understand myself. Three sessions across three months tracked my actual life in ways that felt almost uncanny.</p><p class="testi-author">Daniel K.</p><p class="testi-sign">Capricorn Sun · Trilogy Bundle</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <p class="footer-brand-name">It Starts With The Stars</p>
+        <p class="footer-brand-desc">Astrology, tarot, and cosmic guidance to illuminate your path and help you move through the world with more intention, clarity, and wonder.</p>
+        <div class="footer-social"><a href="#" class="social-btn">𝕏</a><a href="#" class="social-btn">⬡</a><a href="#" class="social-btn">▶</a><a href="#" class="social-btn">◉</a></div>
+      </div>
+      <div><p class="footer-col-title">Navigate</p><ul class="footer-links"><li><a href="#daily">Daily Cosmic</a></li><li><a href="#services">Sessions</a></li><li><a href="#parties">Gatherings</a></li><li><a href="#booking">Book a Reading</a></li></ul></div>
+      <div><p class="footer-col-title">Sessions</p><ul class="footer-links"><li><a href="#booking">Tarot Reading</a></li><li><a href="#booking">Birth Chart</a></li><li><a href="#booking">Synastry</a></li><li><a href="#booking">Bundles</a></li><li><a href="#booking">Monthly Circle</a></li></ul></div>
+      <div><p class="footer-col-title">Connect</p><ul class="footer-links"><li><a href="#">Newsletter</a></li><li><a href="#">Instagram</a></li><li><a href="#">TikTok</a></li><li><a href="#">FAQ</a></li><li><a href="#">Contact</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2026 It Starts With The Stars · Planetary timing from Llewellyn's Daily Planetary Guide · Pacific Time</p>
+      <p class="footer-tagline">The universe has been waiting for you.</p>
+    </div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="confirmModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <span style="font-size:2.8rem;display:block;margin-bottom:0.8rem;">✦</span>
+    <p class="modal-title">Your Session is Confirmed</p>
+    <div class="divider" style="margin:0.8rem 0;"></div>
+    <p class="modal-body">Thank you for booking. A confirmation email with your session details and Zoom link will arrive within 24 hours. The cosmos is already at work. ✨</p>
+    <button onclick="closeModal()" class="btn-primary" style="margin-top:1.5rem;border:none;width:100%;text-align:center;">Close</button>
+  </div>
+</div>
+
+<script>
+/* Cursor */
+const cursor=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.left=mx+'px';cursor.style.top=my+'px';});
+(function animRing(){rx+=(mx-rx)*0.15;ry+=(my-ry)*0.15;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animRing);})();
+document.querySelectorAll('a,button,.service-card,.party-option,.session-option,.tarot-card').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cursor.style.transform='translate(-50%,-50%) scale(2)';ring.style.transform='translate(-50%,-50%) scale(1.5)';});
+  el.addEventListener('mouseleave',()=>{cursor.style.transform='translate(-50%,-50%) scale(1)';ring.style.transform='translate(-50%,-50%) scale(1)';});
+});
+
+/* Scroll Reveal */
+const ro=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible');}),{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(r=>ro.observe(r));
+
+/* Booking */
+function selectSession(el){document.querySelectorAll('.session-option').forEach(o=>o.classList.remove('active'));el.classList.add('active');document.getElementById('totalAmount').textContent='$'+el.dataset.price;}
+function showConfirmation(){document.getElementById('confirmModal').classList.add('open');}
+function closeModal(){document.getElementById('confirmModal').classList.remove('open');}
+document.getElementById('confirmModal').addEventListener('click',function(e){if(e.target===this)closeModal();});
+
+/* ═══════════════════════════
+   CONSTELLATION HERO
+   ═══════════════════════════ */
+const cvs=document.getElementById('constellationCanvas');
+const ctx=cvs.getContext('2d');
+const tooltip=document.getElementById('starTooltip');
+const ttLabel=document.getElementById('tooltipLabel');
+const ttDesc=document.getElementById('tooltipDesc');
+
+function resizeCvs(){cvs.width=cvs.offsetWidth;cvs.height=cvs.offsetHeight;}
+resizeCvs();
+
+const nodes=[
+  {id:'daily',    px:0.15,py:0.24,label:'Daily Cosmic',       desc:"Today's aspects, moon & tarot draw",     r:9, href:'#daily'},
+  {id:'tarot',    px:0.80,py:0.20,label:'Tarot Readings',     desc:'1:1 sessions from $120',                 r:9, href:'#services'},
+  {id:'chart',    px:0.12,py:0.65,label:'Birth Chart',        desc:'Your full natal map — $220',             r:9, href:'#services'},
+  {id:'synastry', px:0.84,py:0.62,label:'Relationship Chart', desc:'Synastry & composite — $280',           r:9, href:'#services'},
+  {id:'parties',  px:0.28,py:0.82,label:'Cosmic Gatherings',  desc:'Dinner & cocktail party tarot',          r:9, href:'#parties'},
+  {id:'book',     px:0.72,py:0.80,label:'Book a Session',     desc:'All offerings — reserve your time',      r:11,href:'#booking'},
+  {id:'bundle',   px:0.50,py:0.28,label:'Trilogy Bundle',     desc:'3 sessions across 90 days — $480',      r:8, href:'#services'},
+];
+const lines=[
+  ['daily','chart'],['daily','bundle'],['bundle','tarot'],['tarot','synastry'],
+  ['chart','parties'],['parties','book'],['book','synastry'],['bundle','book'],
+  ['daily','tarot'],['chart','bundle'],
+];
+
+let bgStars=[];
+function genBg(){
+  bgStars=[];
+  for(let i=0;i<180;i++) bgStars.push({x:Math.random()*cvs.width,y:Math.random()*cvs.height,r:Math.random()*1.1+0.2,tw:Math.random()*Math.PI*2,sp:Math.random()*0.015+0.004});
+}
+genBg();
+
+let hovNode=null,t=0;
+function npos(n){return{x:n.px*cvs.width,y:n.py*cvs.height};}
+
+function draw(){
+  ctx.clearRect(0,0,cvs.width,cvs.height);
+  t+=0.012;
+
+  bgStars.forEach(s=>{
+    const a=0.1+Math.sin(t*s.sp*55+s.tw)*0.35;
+    ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+    ctx.fillStyle=`rgba(201,168,76,${Math.max(0.04,a)})`;ctx.fill();
+  });
+
+  lines.forEach(([a,b])=>{
+    const na=nodes.find(n=>n.id===a),nb=nodes.find(n=>n.id===b);
+    if(!na||!nb)return;
+    const pa=npos(na),pb=npos(nb);
+    const g=ctx.createLinearGradient(pa.x,pa.y,pb.x,pb.y);
+    g.addColorStop(0,'rgba(201,168,76,0.14)');g.addColorStop(0.5,'rgba(201,168,76,0.3)');g.addColorStop(1,'rgba(201,168,76,0.14)');
+    ctx.beginPath();ctx.moveTo(pa.x,pa.y);ctx.lineTo(pb.x,pb.y);
+    ctx.strokeStyle=g;ctx.lineWidth=0.8;ctx.setLineDash([4,7]);ctx.stroke();ctx.setLineDash([]);
+  });
+
+  nodes.forEach(n=>{
+    const p=npos(n),hov=(hovNode===n);
+    const pulse=Math.sin(t+n.px*9)*0.22+1;
+    const br=n.r*pulse;
+    const grd=ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,hov?60:38);
+    grd.addColorStop(0,hov?'rgba(201,168,76,0.6)':'rgba(201,168,76,0.22)');
+    grd.addColorStop(1,'rgba(201,168,76,0)');
+    ctx.beginPath();ctx.arc(p.x,p.y,hov?60:38,0,Math.PI*2);ctx.fillStyle=grd;ctx.fill();
+    ctx.beginPath();ctx.arc(p.x,p.y,hov?br*1.6:br,0,Math.PI*2);
+    ctx.fillStyle=hov?'#f5e6b8':'#c9a84c';
+    ctx.shadowColor='#c9a84c';ctx.shadowBlur=hov?22:10;ctx.fill();ctx.shadowBlur=0;
+    if(hov){
+      ctx.save();ctx.strokeStyle='rgba(245,230,184,0.75)';ctx.lineWidth=0.9;
+      const sc=br*2.8;
+      ctx.beginPath();ctx.moveTo(p.x-sc,p.y);ctx.lineTo(p.x+sc,p.y);ctx.stroke();
+      ctx.beginPath();ctx.moveTo(p.x,p.y-sc);ctx.lineTo(p.x,p.y+sc);ctx.stroke();
+      ctx.restore();
+    }
+    ctx.font=`${hov?'500':'300'} ${cvs.width<600?'0.52rem':'0.6rem'} 'Jost',sans-serif`;
+    ctx.fillStyle=hov?'rgba(245,230,184,1)':'rgba(201,168,76,0.6)';
+    ctx.textAlign='center';
+    ctx.fillText(n.label.toUpperCase(),p.x,p.y+br+16);
+  });
+
+  requestAnimationFrame(draw);
+}
+draw();
+
+cvs.addEventListener('mousemove',e=>{
+  const rect=cvs.getBoundingClientRect(),mx=e.clientX-rect.left,my=e.clientY-rect.top;
+  let found=null;
+  nodes.forEach(n=>{const p=npos(n);if(Math.hypot(mx-p.x,my-p.y)<n.r+24)found=n;});
+  hovNode=found;
+  if(found){
+    const p=npos(found);
+    let tx=p.x+28,ty=p.y-12;
+    if(tx+230>cvs.width)tx=p.x-240;
+    if(ty+85>cvs.height)ty=p.y-95;
+    tooltip.style.left=tx+'px';tooltip.style.top=ty+'px';
+    ttLabel.textContent=found.label;ttDesc.textContent=found.desc;
+    tooltip.classList.add('visible');
+    cursor.style.transform='translate(-50%,-50%) scale(2)';
+    ring.style.transform='translate(-50%,-50%) scale(1.5)';
+  } else {
+    tooltip.classList.remove('visible');
+    cursor.style.transform='translate(-50%,-50%) scale(1)';
+    ring.style.transform='translate(-50%,-50%) scale(1)';
+  }
+});
+cvs.addEventListener('mouseleave',()=>{hovNode=null;tooltip.classList.remove('visible');});
+cvs.addEventListener('click',()=>{if(hovNode){const t=document.querySelector(hovNode.href);if(t)t.scrollIntoView({behavior:'smooth'});}});
+cvs.addEventListener('touchend',e=>{
+  e.preventDefault();
+  const touch=e.changedTouches[0];
+  const rect=cvs.getBoundingClientRect();
+  const tx=touch.clientX-rect.left,ty=touch.clientY-rect.top;
+  nodes.forEach(n=>{const p=npos(n);if(Math.hypot(tx-p.x,ty-p.y)<n.r+32){const tgt=document.querySelector(n.href);if(tgt)tgt.scrollIntoView({behavior:'smooth'});}});
+},{passive:false});
+window.addEventListener('resize',()=>{resizeCvs();genBg();});
+</script>
+</body>
+<script>'undefined'=== typeof _trfq || (window._trfq = []);'undefined'=== typeof _trfd && (window._trfd=[]),_trfd.push({'tccl.baseHost':'secureserver.net'},{'ap':'cpsh-oh'},{'server':'p3plzcpnl505433'},{'dcenter':'p3'},{'cp_id':'10877723'},{'cp_cl':'8'}) // Monitoring performance to make your website faster. If you want to opt-out, please contact web hosting support.</script><script src='https://img1.wsimg.com/traffic-assets/js/tccl.min.js'></script></html>
