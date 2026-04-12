@@ -191,6 +191,30 @@
         "priceNote": "Private session",
         "features": ["Full astrocartography map", "Best cities for your goals", "Relocation insights", "PDF map + written summary"],
         "buttonText": "Book Astrolocation"
+      },
+      {
+        "icon": "\u2648",
+        "name": "Astrology for the Month",
+        "featured": false,
+        "badge": "",
+        "tagline": "Your personal cosmic weather report",
+        "description": "A detailed look at the month ahead based on your natal chart and current planetary transits. Know when to push forward, when to pause, and what themes are rising.",
+        "price": "$80",
+        "priceNote": "Monthly reading",
+        "features": ["Personalized to your birth chart", "Key dates highlighted", "Transit breakdown", "Written summary included"],
+        "buttonText": "Book Monthly"
+      },
+      {
+        "icon": "\ud83c\udf1f",
+        "name": "Yearly Report",
+        "featured": false,
+        "badge": "",
+        "tagline": "The big picture for the year ahead",
+        "description": "A comprehensive annual forecast covering major transits, eclipses, and planetary shifts as they affect your natal chart. The roadmap for your year.",
+        "price": "$200",
+        "priceNote": "Annual reading",
+        "features": ["Full year transit forecast", "Eclipse impact analysis", "Quarter-by-quarter breakdown", "PDF report delivered"],
+        "buttonText": "Book Yearly Report"
       }
     ]
   },
@@ -231,10 +255,9 @@
     "sectionLabel": "\u2726 Reserve Your Session",
     "sectionTitle": "Book Your",
     "sectionTitleEmphasis": "Reading",
-    "subtitle": "All sessions confirmed within 24 hours. Secure payment via Stripe.",
-    "sessionPickerLabel": "Select Your Session",
-    "paymentTitle": "\u2726 Secure Checkout",
-    "bookButtonText": "\u2726 Confirm & Book Session"
+    "subtitle": "Select a session and share a little about yourself. We\u2019ll get back to you within 24 hours to schedule your reading.",
+    "sessionPickerLabel": "What are you interested in?",
+    "bookButtonText": "\u2726 Send Inquiry"
   },
   "testimonials": {
     "sectionLabel": "\u2726 From the Community",
@@ -305,7 +328,7 @@
     "tagline": "The universe has been waiting for you."
   },
   "confirmationModal": {
-    "title": "Your Session is Confirmed",
-    "body": "Thank you for booking. A confirmation email with your session details and Zoom link will arrive within 24 hours. The cosmos is already at work. \u2728"
+    "title": "Your Inquiry Has Been Sent",
+    "body": "Thank you for reaching out. We\u2019ll get back to you within 24 hours to schedule your session. The cosmos is already at work. \u2728"
   }
 }

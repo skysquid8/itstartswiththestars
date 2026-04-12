@@ -432,31 +432,29 @@ footer{padding:5rem 4rem 2.5rem;border-top:1px solid rgba(201,168,76,0.08);posit
     <div class="divider"></div>
     <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.05rem;color:rgba(216,228,255,0.5);max-width:480px;margin:0 auto;">{{ site.booking.subtitle }}</p>
   </div>
-  <div class="booking-form reveal">
-    <div class="form-row"><div class="form-group"><label class="form-label">First Name</label><input type="text" class="form-input" placeholder="Your first name"></div><div class="form-group"><label class="form-label">Last Name</label><input type="text" class="form-input" placeholder="Your last name"></div></div>
-    <div class="form-row"><div class="form-group"><label class="form-label">Email</label><input type="email" class="form-input" placeholder="your@email.com"></div><div class="form-group"><label class="form-label">Date of Birth</label><input type="date" class="form-input"></div></div>
-    <div class="form-row"><div class="form-group"><label class="form-label">Birth Time (if known)</label><input type="time" class="form-input"></div><div class="form-group"><label class="form-label">Birth City</label><input type="text" class="form-input" placeholder="City, Country"></div></div>
+  <form class="booking-form reveal" name="booking" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+    <input type="hidden" name="form-name" value="booking">
+    <p style="display:none"><label>Don't fill this out: <input name="bot-field"></label></p>
+    <input type="hidden" name="session-type" id="sessionType" value="Tarot Reading">
+    <div class="form-row"><div class="form-group"><label class="form-label">First Name</label><input type="text" name="first-name" class="form-input" placeholder="Your first name" required></div><div class="form-group"><label class="form-label">Last Name</label><input type="text" name="last-name" class="form-input" placeholder="Your last name" required></div></div>
+    <div class="form-row"><div class="form-group"><label class="form-label">Email</label><input type="email" name="email" class="form-input" placeholder="your@email.com" required></div><div class="form-group"><label class="form-label">Phone (optional)</label><input type="tel" name="phone" class="form-input" placeholder="(555) 555-5555"></div></div>
+    <div class="form-row"><div class="form-group"><label class="form-label">Date of Birth</label><input type="date" name="dob" class="form-input"></div><div class="form-group"><label class="form-label">Birth Time (if known)</label><input type="time" name="birth-time" class="form-input"></div></div>
+    <div class="form-row"><div class="form-group full"><label class="form-label">Birth City</label><input type="text" name="birth-city" class="form-input" placeholder="City, Country"></div></div>
     <p class="form-label" style="margin-bottom:0.9rem;">{{ site.booking.sessionPickerLabel }}</p>
     <div class="session-picker" id="sessionPicker">
-      <div class="session-option active" data-price="120" onclick="selectSession(this)"><div class="session-option-icon">🔮</div><div class="session-option-name">Tarot Reading</div><div class="session-option-price">$120</div></div>
-      <div class="session-option" data-price="175" onclick="selectSession(this)"><div class="session-option-icon">⭐</div><div class="session-option-name">Birth Chart</div><div class="session-option-price">$175</div></div>
-      <div class="session-option" data-price="180" onclick="selectSession(this)"><div class="session-option-icon">✨</div><div class="session-option-name">Synastry</div><div class="session-option-price">$180</div></div>
-      <div class="session-option" data-price="200" onclick="selectSession(this)"><div class="session-option-icon">📦</div><div class="session-option-name">Triad Bundle</div><div class="session-option-price">$200</div></div>
-      <div class="session-option" data-price="95" onclick="selectSession(this)"><div class="session-option-icon">👥</div><div class="session-option-name">Group Session</div><div class="session-option-price">$95 / person</div></div>
-      <div class="session-option" data-price="55" onclick="selectSession(this)"><div class="session-option-icon">🌙</div><div class="session-option-name">Monthly Forecast</div><div class="session-option-price">$55</div></div>
-      <div class="session-option" data-price="150" onclick="selectSession(this)"><div class="session-option-icon">🌍</div><div class="session-option-name">Astrolocation</div><div class="session-option-price">$150</div></div>
+      <div class="session-option active" data-name="Tarot Reading" onclick="selectSession(this)"><div class="session-option-icon">🔮</div><div class="session-option-name">Tarot Reading</div><div class="session-option-price">$120</div></div>
+      <div class="session-option" data-name="Birth Chart and Interpretation" onclick="selectSession(this)"><div class="session-option-icon">⭐</div><div class="session-option-name">Birth Chart</div><div class="session-option-price">$175</div></div>
+      <div class="session-option" data-name="Synastry" onclick="selectSession(this)"><div class="session-option-icon">✨</div><div class="session-option-name">Synastry</div><div class="session-option-price">$180</div></div>
+      <div class="session-option" data-name="Triad Bundle" onclick="selectSession(this)"><div class="session-option-icon">📦</div><div class="session-option-name">Triad Bundle</div><div class="session-option-price">$200</div></div>
+      <div class="session-option" data-name="Group Session" onclick="selectSession(this)"><div class="session-option-icon">👥</div><div class="session-option-name">Group Session</div><div class="session-option-price">$95 / person</div></div>
+      <div class="session-option" data-name="Monthly Forecast" onclick="selectSession(this)"><div class="session-option-icon">🌙</div><div class="session-option-name">Monthly Forecast</div><div class="session-option-price">$55</div></div>
+      <div class="session-option" data-name="Astrolocation Reading" onclick="selectSession(this)"><div class="session-option-icon">🌍</div><div class="session-option-name">Astrolocation</div><div class="session-option-price">$150</div></div>
+      <div class="session-option" data-name="Astrology for the Month" onclick="selectSession(this)"><div class="session-option-icon">♈</div><div class="session-option-name">Monthly Astrology</div><div class="session-option-price">$80</div></div>
+      <div class="session-option" data-name="Yearly Report" onclick="selectSession(this)"><div class="session-option-icon">🌟</div><div class="session-option-name">Yearly Report</div><div class="session-option-price">$200</div></div>
     </div>
-    <div class="form-row"><div class="form-group"><label class="form-label">Preferred Date</label><input type="date" class="form-input"></div><div class="form-group"><label class="form-label">Preferred Time</label><select class="form-select"><option value="">Select time...</option><option>Morning (9–12 AM)</option><option>Afternoon (12–5 PM)</option><option>Evening (5–9 PM)</option></select></div></div>
-    <div class="form-row"><div class="form-group full"><label class="form-label">What brings you here? (Optional)</label><textarea class="form-textarea" placeholder="A question you're sitting with, a theme, or simply how you're feeling..."></textarea></div></div>
-    <div class="payment-area">
-      <p class="payment-title">{{ site.booking.paymentTitle }}</p>
-      <div class="card-icons"><span class="card-icon">VISA</span><span class="card-icon">MC</span><span class="card-icon">AMEX</span><span class="card-icon">APPLE PAY</span><span class="card-icon">VENMO</span></div>
-      <div class="form-row"><div class="form-group full"><label class="form-label">Card Number</label><input type="text" class="form-input" placeholder="&bull;&bull;&bull;&bull; &bull;&bull;&bull;&bull; &bull;&bull;&bull;&bull; &bull;&bull;&bull;&bull;"></div></div>
-      <div class="form-row"><div class="form-group"><label class="form-label">Expiry</label><input type="text" class="form-input" placeholder="MM / YY"></div><div class="form-group"><label class="form-label">CVC</label><input type="text" class="form-input" placeholder="&bull;&bull;&bull;"></div></div>
-      <div class="total-row"><span class="total-label">Session Total</span><span class="total-amount" id="totalAmount">$120</span></div>
-      <button class="btn-book" onclick="showConfirmation()">{{ site.booking.bookButtonText }}</button>
-    </div>
-  </div>
+    <div class="form-row"><div class="form-group full"><label class="form-label">What brings you here? (Optional)</label><textarea name="message" class="form-textarea" placeholder="A question you're sitting with, a theme, or simply how you're feeling..."></textarea></div></div>
+    <button type="submit" class="btn-book">{{ site.booking.bookButtonText }}</button>
+  </form>
 </section>
 
 <!-- TESTIMONIALS -->
@@ -539,7 +537,7 @@ const ro=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.
 document.querySelectorAll('.reveal').forEach(r=>ro.observe(r));
 
 /* Booking */
-function selectSession(el){document.querySelectorAll('.session-option').forEach(o=>o.classList.remove('active'));el.classList.add('active');document.getElementById('totalAmount').textContent='$'+el.dataset.price;}
+function selectSession(el){document.querySelectorAll('.session-option').forEach(o=>o.classList.remove('active'));el.classList.add('active');document.getElementById('sessionType').value=el.dataset.name;}
 function showConfirmation(){document.getElementById('confirmModal').classList.add('open');}
 function closeModal(){document.getElementById('confirmModal').classList.remove('open');}
 document.getElementById('confirmModal').addEventListener('click',function(e){if(e.target===this)closeModal();});
