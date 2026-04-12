@@ -1,0 +1,299 @@
+{
+  "settings": {
+    "siteTitle": "It Starts With The Stars \u2014 Astrology & Tarot",
+    "fontsUrl": "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600;700&family=Jost:wght@300;400;500&display=swap"
+  },
+  "nav": {
+    "logoText": "It Starts",
+    "logoSpan": " With The Stars",
+    "links": [
+      { "text": "Daily Cosmic", "href": "#daily" },
+      { "text": "Sessions", "href": "#services" },
+      { "text": "Gatherings", "href": "#parties" },
+      { "text": "Book Now", "href": "#booking" }
+    ],
+    "ctaText": "Book a Reading",
+    "ctaHref": "#booking"
+  },
+  "hero": {
+    "eyebrow": "\u2726 Astrology \u00b7 Tarot \u00b7 Cosmic Guidance \u2726",
+    "titleLine1": "It Starts",
+    "titleLine2": "With The Stars",
+    "hint": "\u2726 \u00a0 Click a star to begin \u00a0 \u2726",
+    "photoCredit": "Mount Kailash, Tibet \u00b7 CC BY 2.5 Ond\u0159ej \u017dv\u00e1\u010dek",
+    "backgroundImage": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Kailash_north.JPG/1280px-Kailash_north.JPG",
+    "constellationNodes": [
+      { "id": "daily", "px": 0.15, "py": 0.24, "label": "Daily Cosmic", "desc": "Today's aspects, moon & tarot draw", "r": 9, "href": "#daily" },
+      { "id": "tarot", "px": 0.80, "py": 0.20, "label": "Tarot Readings", "desc": "1:1 sessions from $120", "r": 9, "href": "#services" },
+      { "id": "chart", "px": 0.12, "py": 0.65, "label": "Birth Chart", "desc": "Your full natal map \u2014 $220", "r": 9, "href": "#services" },
+      { "id": "synastry", "px": 0.84, "py": 0.62, "label": "Relationship Chart", "desc": "Synastry & composite \u2014 $280", "r": 9, "href": "#services" },
+      { "id": "parties", "px": 0.28, "py": 0.82, "label": "Cosmic Gatherings", "desc": "Dinner & cocktail party tarot", "r": 9, "href": "#parties" },
+      { "id": "book", "px": 0.72, "py": 0.80, "label": "Book a Session", "desc": "All offerings \u2014 reserve your time", "r": 11, "href": "#booking" },
+      { "id": "bundle", "px": 0.50, "py": 0.28, "label": "Trilogy Bundle", "desc": "3 sessions across 90 days \u2014 $480", "r": 8, "href": "#services" }
+    ],
+    "constellationLines": [
+      ["daily", "chart"], ["daily", "bundle"], ["bundle", "tarot"], ["tarot", "synastry"],
+      ["chart", "parties"], ["parties", "book"], ["book", "synastry"], ["bundle", "book"],
+      ["daily", "tarot"], ["chart", "bundle"]
+    ]
+  },
+  "daily": {
+    "sectionLabel": "\u2726 Daily Cosmic Weather",
+    "sectionTitle": "The Heavens on",
+    "sectionTitleEmphasis": "Sunday, Feb 22",
+    "cosmicSummaryLine1": "Moon in Taurus \u00b7 Waxing Crescent \u00b7 No Void Period Today",
+    "cosmicSummaryLine2": "Sun in Pisces \u00b7 Saturn newly in Aries \u00b7 Jupiter Rx in Cancer",
+    "retroAlert": {
+      "icon": "\u2643",
+      "title": "\u26a0 Mercury Retrograde begins February 25 \u00b7 Pacific Time",
+      "body": "Three days from now Mercury stations retrograde at 22\u00b0 Pisces. Back up devices, delay signing contracts if you can, and give communications extra patience. Pre-shadow effects are already felt \u2014 review carefully before hitting send."
+    },
+    "panels": [
+      {
+        "icon": "\u263d",
+        "date": "Today's Moon \u00b7 Pacific Time",
+        "sign": "Taurus \u2014 Grounding & Pleasure",
+        "time": "",
+        "body": "The Moon settles into Taurus all day with no void period \u2014 a rarity that makes today unusually reliable for intention-setting and practical action. Taurus Moon calls us toward beauty, stillness, and the body. Slow down. Touch something real. The earth element asks: what are you actually building? Plant a seed today and it will hold.",
+        "meta": "Moon enters Gemini tomorrow \u00b7 No void window today \u2014 a full green-light day",
+        "stars": 5
+      },
+      {
+        "icon": "\u2640",
+        "date": "Peak Aspect \u00b7 12:02 pm PT",
+        "sign": "Venus \u2640 Trine Jupiter Rx \u2643",
+        "time": "Exact 12:02 pm Pacific",
+        "body": "Venus at 15\u00b0 Pisces forms an exact trine to Jupiter Rx at 15\u00b0 Cancer \u2014 the most beautiful aspect in the sky today and one of the most generous of the year. Heart-opening, abundance-inviting energy. Creative work initiated now carries unusual grace. Conversations about money, love, or beauty find easy flow. Jupiter retrograde asks: are you receiving what's already available to you?",
+        "meta": "Venus in Pisces \u00b7 Jupiter Rx in Cancer \u00b7 Water trine \u2014 flowing, receptive, fertile",
+        "stars": 5
+      },
+      {
+        "icon": "\u2644",
+        "date": "Major Transit Aftermath \u00b7 Feb 20",
+        "sign": "Saturn \u2644 Conjunct Neptune \u2646 in Aries",
+        "time": "",
+        "body": "Two days ago Saturn met Neptune at 0\u00b0 Aries \u2014 a conjunction that happens once every 36 years. We are still inside its reverb. The dreamer and the realist fused at the very first degree of Aries, the point of new beginnings. What vision are you being asked to make real? What illusion is dissolving into something more honest? This is the axis of sacred responsibility.",
+        "meta": "Exact Feb 20 \u00b7 Still within 2\u00b0 orb \u2014 deeply active energy",
+        "stars": 4
+      },
+      {
+        "icon": "\ud83c\udca0",
+        "date": "Today's Tarot \u00b7 Daily Draw",
+        "sign": "The Empress \u2014 III",
+        "time": "",
+        "body": "With Venus trining Jupiter and the Moon in sensual Taurus, The Empress arrives exactly right. She is abundance embodied \u2014 creative power, fertile ground, the body as sacred. She asks you to stop striving and start receiving. What is ready to bloom if you stop forcing it? Today favors the arts, nature, pleasure without guilt, and trusting that growth happens even when you are not watching.",
+        "meta": "Venus rules both Taurus and The Empress \u2014 a doubled invitation today",
+        "stars": 5
+      }
+    ],
+    "sourceCredit": {
+      "text": "\u2726 Planetary timing referenced from Llewellyn's 2026 Daily Planetary Guide \u00b7 Pacific Time \u2726",
+      "href": "https://www.llewellyn.com/product.php?ean=9780738775173"
+    }
+  },
+  "tarotStrip": [
+    { "icon": "\ud83c\udf1f", "name": "The Star" },
+    { "icon": "\ud83c\udf19", "name": "The Moon" },
+    { "icon": "\u2600\ufe0f", "name": "The Sun" },
+    { "icon": "\u26a1", "name": "The Tower" },
+    { "icon": "\u2696\ufe0f", "name": "Justice" },
+    { "icon": "\ud83c\udf39", "name": "The Lovers" },
+    { "icon": "\ud83d\udd2e", "name": "High Priestess" },
+    { "icon": "\ud83c\udfc6", "name": "The World" },
+    { "icon": "\ud83e\udd81", "name": "Strength" },
+    { "icon": "\ud83d\udc51", "name": "The Empress" }
+  ],
+  "services": {
+    "sectionLabel": "\u2726 Sessions & Offerings",
+    "sectionTitle": "Choose Your",
+    "sectionTitleEmphasis": "Cosmic Journey",
+    "items": [
+      {
+        "icon": "\ud83d\udd2e",
+        "name": "Tarot Reading",
+        "featured": false,
+        "badge": "",
+        "tagline": "The cards reveal what the heart already knows",
+        "description": "A focused 60-minute tarot session exploring your current energies, a specific question, or a full Celtic Cross spread for an aerial view of your path.",
+        "price": "$120",
+        "priceNote": "60-minute private session",
+        "features": ["One-on-one via Zoom or in person", "Recorded session sent to you", "Written card summary", "Follow-up Q&A (48 hrs)"],
+        "buttonText": "Book Reading"
+      },
+      {
+        "icon": "\u2b50",
+        "name": "Birth Chart Deep Dive",
+        "featured": true,
+        "badge": "Most Popular",
+        "tagline": "The full map of who you came here to be",
+        "description": "A comprehensive 90-minute natal chart analysis \u2014 sun, moon, rising, planetary placements, aspects, and life timing through progressions and transits.",
+        "price": "$220",
+        "priceNote": "90-minute private session",
+        "features": ["Complete natal chart analysis", "Current transits & year ahead", "PDF chart + written report", "Recording + 7-day follow-up"],
+        "buttonText": "Book Deep Dive"
+      },
+      {
+        "icon": "\u2728",
+        "name": "Relationship Synastry",
+        "featured": false,
+        "badge": "",
+        "tagline": "Why you found each other \u2014 and what it means",
+        "description": "A 90-minute synastry and composite chart reading for couples or business partners. Understand your connection at the cosmic level.",
+        "price": "$280",
+        "priceNote": "90 min \u00b7 two charts",
+        "features": ["Synastry + composite charts", "Compatibility themes & gifts", "Karmic patterns & lessons", "Both parties may attend"],
+        "buttonText": "Book Synastry"
+      },
+      {
+        "icon": "\ud83d\udce6",
+        "name": "Bundle: The Trilogy",
+        "featured": false,
+        "badge": "",
+        "tagline": "Past \u00b7 Present \u00b7 Future \u2014 the full picture",
+        "description": "Three sessions across 90 days: natal chart, midpoint tarot check-in, and a forward-looking solar return reading. The most transformative offering.",
+        "price": "$480",
+        "priceNote": "3 sessions \u00b7 save $80",
+        "features": ["Natal deep dive (90 min)", "Midpoint tarot check-in (45 min)", "Solar return + year ahead (60 min)", "Priority scheduling"],
+        "buttonText": "Book Bundle"
+      },
+      {
+        "icon": "\ud83d\udc65",
+        "name": "Group Session",
+        "featured": false,
+        "badge": "",
+        "tagline": "Cosmic wisdom, shared",
+        "description": "A 2-hour group reading for up to 8 people. Each participant gets a mini personal reading plus a group tarot spread for the collective energy.",
+        "price": "$95",
+        "priceNote": "per person \u00b7 min 4 guests",
+        "features": ["Up to 8 participants", "Individual mini-readings", "Group tarot spread", "Virtual or in-person"],
+        "buttonText": "Book Group"
+      },
+      {
+        "icon": "\ud83c\udf19",
+        "name": "Monthly Membership",
+        "featured": false,
+        "badge": "",
+        "tagline": "Stay aligned, all year long",
+        "description": "Monthly new moon intentions, full moon release tarot, private community access, and 20% off all individual sessions.",
+        "price": "$55",
+        "priceNote": "per month \u00b7 cancel anytime",
+        "features": ["2 group ceremonies/month", "Private community access", "Monthly cosmic newsletter", "20% off all 1:1 sessions"],
+        "buttonText": "Join Circle"
+      }
+    ]
+  },
+  "parties": {
+    "sectionLabel": "\u2726 Cosmic Gatherings",
+    "sectionTitle": "Tarot & Stars",
+    "sectionTitleEmphasis": "for Your Next Party",
+    "lead": "Imagine a dinner party where the conversation goes deeper than small talk \u2014 because the stars are guiding it. Tarot at your table turns any gathering into an unforgettable evening.",
+    "ctaText": "Inquire About a Gathering",
+    "options": [
+      {
+        "icon": "\ud83c\udf7d\ufe0f",
+        "name": "The Dinner Party Experience",
+        "description": "2\u20133 hours of readings woven through a multi-course evening. Guests drop in for private mini-readings between courses.",
+        "price": "Starting at $450 \u00b7 up to 12 guests"
+      },
+      {
+        "icon": "\ud83e\udd42",
+        "name": "Cocktail Party Tarot",
+        "description": "Perfect for birthdays, bachelorettes, and holiday parties. 3-hour event with tarot, astrology Q&A, and a group party spread.",
+        "price": "Starting at $550 \u00b7 up to 20 guests"
+      },
+      {
+        "icon": "\ud83c\udf82",
+        "name": "Birthday Solar Return",
+        "description": "A special reading mapping the entire year ahead. The ideal centerpiece of a birthday gathering \u2014 a gift that lasts all year.",
+        "price": "$185 \u00b7 birthday person only"
+      },
+      {
+        "icon": "\ud83c\udfe2",
+        "name": "Corporate & Team Events",
+        "description": "Astrology as a team-building lens \u2014 collective energy, communication styles, and how planetary cycles map to project timelines.",
+        "price": "Custom pricing \u00b7 contact to inquire"
+      }
+    ]
+  },
+  "booking": {
+    "sectionLabel": "\u2726 Reserve Your Session",
+    "sectionTitle": "Book Your",
+    "sectionTitleEmphasis": "Reading",
+    "subtitle": "All sessions confirmed within 24 hours. Secure payment via Stripe.",
+    "sessionPickerLabel": "Select Your Session",
+    "paymentTitle": "\u2726 Secure Checkout",
+    "bookButtonText": "\u2726 Confirm & Book Session"
+  },
+  "testimonials": {
+    "sectionLabel": "\u2726 From the Community",
+    "sectionTitle": "What the",
+    "sectionTitleEmphasis": "Stars Revealed",
+    "items": [
+      {
+        "glyph": "\u263d",
+        "quote": "She described exactly what I'd been feeling for months in a way I couldn't articulate myself. I left that session knowing what to do next.",
+        "author": "Maya R.",
+        "signInfo": "Scorpio Rising \u00b7 Birth Chart Deep Dive"
+      },
+      {
+        "glyph": "\u2726",
+        "quote": "We had tarot at our dinner party and it was the most memorable evening any of us could remember. People are still talking about their readings six months later.",
+        "author": "Simone & Friends",
+        "signInfo": "Dinner Party \u00b7 11 Guests"
+      },
+      {
+        "glyph": "\u2643",
+        "quote": "The Trilogy Bundle changed how I understand myself. Three sessions across three months tracked my actual life in ways that felt almost uncanny.",
+        "author": "Daniel K.",
+        "signInfo": "Capricorn Sun \u00b7 Trilogy Bundle"
+      }
+    ]
+  },
+  "footer": {
+    "brandName": "It Starts With The Stars",
+    "brandDesc": "Astrology, tarot, and cosmic guidance to illuminate your path and help you move through the world with more intention, clarity, and wonder.",
+    "socialLinks": [
+      { "icon": "\ud835\udd4f", "href": "#" },
+      { "icon": "\u2b21", "href": "#" },
+      { "icon": "\u25b6", "href": "#" },
+      { "icon": "\u25c9", "href": "#" }
+    ],
+    "navColumns": [
+      {
+        "title": "Navigate",
+        "links": [
+          { "text": "Daily Cosmic", "href": "#daily" },
+          { "text": "Sessions", "href": "#services" },
+          { "text": "Gatherings", "href": "#parties" },
+          { "text": "Book a Reading", "href": "#booking" }
+        ]
+      },
+      {
+        "title": "Sessions",
+        "links": [
+          { "text": "Tarot Reading", "href": "#booking" },
+          { "text": "Birth Chart", "href": "#booking" },
+          { "text": "Synastry", "href": "#booking" },
+          { "text": "Bundles", "href": "#booking" },
+          { "text": "Monthly Circle", "href": "#booking" }
+        ]
+      },
+      {
+        "title": "Connect",
+        "links": [
+          { "text": "Newsletter", "href": "#" },
+          { "text": "Instagram", "href": "#" },
+          { "text": "TikTok", "href": "#" },
+          { "text": "FAQ", "href": "#" },
+          { "text": "Contact", "href": "#" }
+        ]
+      }
+    ],
+    "copyright": "\u00a9 2026 It Starts With The Stars \u00b7 Planetary timing from Llewellyn's Daily Planetary Guide \u00b7 Pacific Time",
+    "tagline": "The universe has been waiting for you."
+  },
+  "confirmationModal": {
+    "title": "Your Session is Confirmed",
+    "body": "Thank you for booking. A confirmation email with your session details and Zoom link will arrive within 24 hours. The cosmos is already at work. \u2728"
+  }
+}

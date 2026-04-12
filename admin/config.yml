@@ -1,0 +1,230 @@
+backend:
+  name: git-gateway
+  branch: main
+
+local_backend: true
+
+media_folder: "assets/uploads"
+public_folder: "/assets/uploads"
+
+collections:
+  - name: "content"
+    label: "Site Content"
+    files:
+      - name: "content"
+        label: "All Content"
+        file: "_data/site.json"
+        fields:
+          # ─── Site Settings ───
+          - label: "Site Settings"
+            name: "settings"
+            widget: "object"
+            fields:
+              - { label: "Site Title", name: "siteTitle", widget: "string" }
+              - { label: "Google Fonts URL", name: "fontsUrl", widget: "string" }
+
+          # ─── Navigation ───
+          - label: "Navigation"
+            name: "nav"
+            widget: "object"
+            fields:
+              - { label: "Logo Text", name: "logoText", widget: "string" }
+              - { label: "Logo Span", name: "logoSpan", widget: "string" }
+              - label: "Nav Links"
+                name: "links"
+                widget: "list"
+                fields:
+                  - { label: "Text", name: "text", widget: "string" }
+                  - { label: "Href", name: "href", widget: "string" }
+              - { label: "CTA Text", name: "ctaText", widget: "string" }
+              - { label: "CTA Href", name: "ctaHref", widget: "string" }
+
+          # ─── Hero Section ───
+          - label: "Hero"
+            name: "hero"
+            widget: "object"
+            fields:
+              - { label: "Eyebrow Text", name: "eyebrow", widget: "string" }
+              - { label: "Title Line 1", name: "titleLine1", widget: "string" }
+              - { label: "Title Line 2 (italic)", name: "titleLine2", widget: "string" }
+              - { label: "Hint Text", name: "hint", widget: "string" }
+              - { label: "Photo Credit", name: "photoCredit", widget: "string" }
+              - { label: "Background Image URL", name: "backgroundImage", widget: "string" }
+              - label: "Constellation Nodes"
+                name: "constellationNodes"
+                widget: "list"
+                fields:
+                  - { label: "ID", name: "id", widget: "string" }
+                  - { label: "Position X (0-1)", name: "px", widget: "number", value_type: "float", step: 0.01 }
+                  - { label: "Position Y (0-1)", name: "py", widget: "number", value_type: "float", step: 0.01 }
+                  - { label: "Label", name: "label", widget: "string" }
+                  - { label: "Description", name: "desc", widget: "string" }
+                  - { label: "Radius", name: "r", widget: "number", value_type: "int" }
+                  - { label: "Link Href", name: "href", widget: "string" }
+              - label: "Constellation Lines"
+                name: "constellationLines"
+                widget: "list"
+                field:
+                  label: "Connection"
+                  name: "connection"
+                  widget: "list"
+                  field:
+                    label: "Node ID"
+                    name: "nodeId"
+                    widget: "string"
+
+          # ─── Daily Cosmic ───
+          - label: "Daily Cosmic"
+            name: "daily"
+            widget: "object"
+            fields:
+              - { label: "Section Label", name: "sectionLabel", widget: "string" }
+              - { label: "Section Title", name: "sectionTitle", widget: "string" }
+              - { label: "Section Title Emphasis", name: "sectionTitleEmphasis", widget: "string" }
+              - { label: "Cosmic Summary Line 1", name: "cosmicSummaryLine1", widget: "string" }
+              - { label: "Cosmic Summary Line 2", name: "cosmicSummaryLine2", widget: "string" }
+              - label: "Retrograde Alert"
+                name: "retroAlert"
+                widget: "object"
+                fields:
+                  - { label: "Icon", name: "icon", widget: "string" }
+                  - { label: "Title", name: "title", widget: "string" }
+                  - { label: "Body", name: "body", widget: "text" }
+              - label: "Panels"
+                name: "panels"
+                widget: "list"
+                fields:
+                  - { label: "Icon", name: "icon", widget: "string" }
+                  - { label: "Date", name: "date", widget: "string" }
+                  - { label: "Sign", name: "sign", widget: "string" }
+                  - { label: "Time Badge", name: "time", widget: "string", required: false }
+                  - { label: "Body", name: "body", widget: "text" }
+                  - { label: "Meta", name: "meta", widget: "string" }
+                  - { label: "Stars (1-5)", name: "stars", widget: "number", value_type: "int", min: 1, max: 5 }
+              - label: "Source Credit"
+                name: "sourceCredit"
+                widget: "object"
+                fields:
+                  - { label: "Text", name: "text", widget: "string" }
+                  - { label: "Link", name: "href", widget: "string" }
+
+          # ─── Tarot Strip ───
+          - label: "Tarot Strip Cards"
+            name: "tarotStrip"
+            widget: "list"
+            fields:
+              - { label: "Icon", name: "icon", widget: "string" }
+              - { label: "Card Name", name: "name", widget: "string" }
+
+          # ─── Services ───
+          - label: "Services"
+            name: "services"
+            widget: "object"
+            fields:
+              - { label: "Section Label", name: "sectionLabel", widget: "string" }
+              - { label: "Section Title", name: "sectionTitle", widget: "string" }
+              - { label: "Section Title Emphasis", name: "sectionTitleEmphasis", widget: "string" }
+              - label: "Service Items"
+                name: "items"
+                widget: "list"
+                fields:
+                  - { label: "Icon", name: "icon", widget: "string" }
+                  - { label: "Name", name: "name", widget: "string" }
+                  - { label: "Featured?", name: "featured", widget: "boolean", default: false }
+                  - { label: "Badge Text", name: "badge", widget: "string", required: false }
+                  - { label: "Tagline", name: "tagline", widget: "string" }
+                  - { label: "Description", name: "description", widget: "text" }
+                  - { label: "Price", name: "price", widget: "string" }
+                  - { label: "Price Note", name: "priceNote", widget: "string" }
+                  - label: "Features"
+                    name: "features"
+                    widget: "list"
+                    field:
+                      label: "Feature"
+                      name: "feature"
+                      widget: "string"
+                  - { label: "Button Text", name: "buttonText", widget: "string" }
+
+          # ─── Parties ───
+          - label: "Parties"
+            name: "parties"
+            widget: "object"
+            fields:
+              - { label: "Section Label", name: "sectionLabel", widget: "string" }
+              - { label: "Section Title", name: "sectionTitle", widget: "string" }
+              - { label: "Section Title Emphasis", name: "sectionTitleEmphasis", widget: "string" }
+              - { label: "Lead Text", name: "lead", widget: "text" }
+              - { label: "CTA Button Text", name: "ctaText", widget: "string" }
+              - label: "Party Options"
+                name: "options"
+                widget: "list"
+                fields:
+                  - { label: "Icon", name: "icon", widget: "string" }
+                  - { label: "Name", name: "name", widget: "string" }
+                  - { label: "Description", name: "description", widget: "text" }
+                  - { label: "Price", name: "price", widget: "string" }
+
+          # ─── Booking ───
+          - label: "Booking"
+            name: "booking"
+            widget: "object"
+            fields:
+              - { label: "Section Label", name: "sectionLabel", widget: "string" }
+              - { label: "Section Title", name: "sectionTitle", widget: "string" }
+              - { label: "Section Title Emphasis", name: "sectionTitleEmphasis", widget: "string" }
+              - { label: "Subtitle", name: "subtitle", widget: "string" }
+              - { label: "Session Picker Label", name: "sessionPickerLabel", widget: "string" }
+              - { label: "Payment Title", name: "paymentTitle", widget: "string" }
+              - { label: "Book Button Text", name: "bookButtonText", widget: "string" }
+
+          # ─── Testimonials ───
+          - label: "Testimonials"
+            name: "testimonials"
+            widget: "object"
+            fields:
+              - { label: "Section Label", name: "sectionLabel", widget: "string" }
+              - { label: "Section Title", name: "sectionTitle", widget: "string" }
+              - { label: "Section Title Emphasis", name: "sectionTitleEmphasis", widget: "string" }
+              - label: "Testimonial Items"
+                name: "items"
+                widget: "list"
+                fields:
+                  - { label: "Glyph", name: "glyph", widget: "string" }
+                  - { label: "Quote", name: "quote", widget: "text" }
+                  - { label: "Author", name: "author", widget: "string" }
+                  - { label: "Sign Info", name: "signInfo", widget: "string" }
+
+          # ─── Footer ───
+          - label: "Footer"
+            name: "footer"
+            widget: "object"
+            fields:
+              - { label: "Brand Name", name: "brandName", widget: "string" }
+              - { label: "Brand Description", name: "brandDesc", widget: "text" }
+              - label: "Social Links"
+                name: "socialLinks"
+                widget: "list"
+                fields:
+                  - { label: "Icon", name: "icon", widget: "string" }
+                  - { label: "URL", name: "href", widget: "string" }
+              - label: "Nav Columns"
+                name: "navColumns"
+                widget: "list"
+                fields:
+                  - { label: "Column Title", name: "title", widget: "string" }
+                  - label: "Links"
+                    name: "links"
+                    widget: "list"
+                    fields:
+                      - { label: "Text", name: "text", widget: "string" }
+                      - { label: "URL", name: "href", widget: "string" }
+              - { label: "Copyright", name: "copyright", widget: "string" }
+              - { label: "Tagline", name: "tagline", widget: "string" }
+
+          # ─── Confirmation Modal ───
+          - label: "Confirmation Modal"
+            name: "confirmationModal"
+            widget: "object"
+            fields:
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Body", name: "body", widget: "text" }

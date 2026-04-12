@@ -1,0 +1,12 @@
+{
+  "name": "itstartswiththestars",
+  "version": "1.0.0",
+  "description": "It Starts With The Stars - Astrology & Tarot",
+  "scripts": {
+    "build": "npx @11ty/eleventy",
+    "start": "npx @11ty/eleventy --serve"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^2.0.1"
+  }
+}
