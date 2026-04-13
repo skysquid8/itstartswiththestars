@@ -118,7 +118,8 @@
         "price": "$120",
         "priceNote": "60-minute private session",
         "features": ["One-on-one via Zoom or in person", "Recorded session sent to you", "Written card summary", "Follow-up Q&A (48 hrs)"],
-        "buttonText": "Book Reading"
+        "buttonText": "Book Reading",
+        "paymentLink": "https://buy.stripe.com/7sY7sNalhcLq4Tjd9c1Nu00"
       },
       {
         "icon": "\u2b50",
@@ -130,7 +131,8 @@
         "price": "$175",
         "priceNote": "Private session",
         "features": ["Complete natal chart analysis", "Current transits & year ahead", "PDF chart + written report", "Recording + 7-day follow-up"],
-        "buttonText": "Book Birth Chart"
+        "buttonText": "Book Birth Chart",
+        "paymentLink": "https://buy.stripe.com/eVq7sNalh12IdpP1qu1Nu01"
       },
       {
         "icon": "\u2728",
@@ -142,7 +144,8 @@
         "price": "$180",
         "priceNote": "Two charts",
         "features": ["Synastry + composite charts", "Compatibility themes & gifts", "Karmic patterns & lessons", "Both parties may attend"],
-        "buttonText": "Book Synastry"
+        "buttonText": "Book Synastry",
+        "paymentLink": "https://buy.stripe.com/6oU9AVbpl12I2Lbd9c1Nu02"
       },
       {
         "icon": "\ud83d\udce6",
@@ -154,7 +157,8 @@
         "price": "$200",
         "priceNote": "3 sessions",
         "features": ["Birth chart reading", "Progressed chart reading", "Astrolocation reading", "Priority scheduling"],
-        "buttonText": "Book Triad"
+        "buttonText": "Book Triad",
+        "paymentLink": "https://buy.stripe.com/3cI28t7954eU5Xn6KO1Nu03"
       },
       {
         "icon": "\ud83d\udc65",
@@ -166,7 +170,8 @@
         "price": "$95",
         "priceNote": "per person \u00b7 min 4 guests",
         "features": ["Up to 8 participants", "Individual mini-readings", "Group tarot spread", "Virtual or in-person"],
-        "buttonText": "Book Group"
+        "buttonText": "Book Group",
+        "paymentLink": "https://buy.stripe.com/9B64gB9hdeTy71r9X01Nu04"
       },
       {
         "icon": "\ud83c\udf19",
@@ -178,7 +183,8 @@
         "price": "$55",
         "priceNote": "per month",
         "features": ["Personalized monthly forecast", "Transit highlights for your chart", "Key dates & opportunities", "Delivered to your inbox"],
-        "buttonText": "Get Forecast"
+        "buttonText": "Get Forecast",
+        "paymentLink": "https://buy.stripe.com/9B63cx651eTyadDc581Nu05"
       },
       {
         "icon": "\ud83c\udf0d",
@@ -190,7 +196,8 @@
         "price": "$150",
         "priceNote": "Private session",
         "features": ["Full astrocartography map", "Best cities for your goals", "Relocation insights", "PDF map + written summary"],
-        "buttonText": "Book Astrolocation"
+        "buttonText": "Book Astrolocation",
+        "paymentLink": "https://buy.stripe.com/3cIfZjfFBeTyfxX4CG1Nu06"
       },
       {
         "icon": "\u2648",
@@ -202,7 +209,8 @@
         "price": "$80",
         "priceNote": "Monthly reading",
         "features": ["Personalized to your birth chart", "Key dates highlighted", "Transit breakdown", "Written summary included"],
-        "buttonText": "Book Monthly"
+        "buttonText": "Book Monthly",
+        "paymentLink": "https://buy.stripe.com/cNi6oJctpaDi2Lb6KO1Nu07"
       },
       {
         "icon": "\ud83c\udf1f",
@@ -214,7 +222,8 @@
         "price": "$200",
         "priceNote": "Annual reading",
         "features": ["Full year transit forecast", "Eclipse impact analysis", "Quarter-by-quarter breakdown", "PDF report delivered"],
-        "buttonText": "Book Yearly Report"
+        "buttonText": "Book Yearly Report",
+        "paymentLink": "https://buy.stripe.com/cNifZj2SPh1G4Tjd9c1Nu08"
       }
     ]
   },

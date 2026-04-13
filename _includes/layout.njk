@@ -388,7 +388,7 @@ footer{padding:5rem 4rem 2.5rem;border-top:1px solid rgba(201,168,76,0.08);posit
         <li>{{ feature }}</li>
         {% endfor %}
       </ul>
-      <a href="#booking" class="btn-service">{{ service.buttonText }}</a>
+      <a href="{{ service.paymentLink if service.paymentLink else '#booking' }}" class="btn-service" {% if service.paymentLink %}target="_blank" rel="noopener"{% endif %}>{{ service.buttonText }}</a>
     </div>
     {% endfor %}
   </div>
