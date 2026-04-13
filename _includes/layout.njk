@@ -605,8 +605,8 @@ function draw(){
       ctx.beginPath();ctx.moveTo(p.x,p.y-sc);ctx.lineTo(p.x,p.y+sc);ctx.stroke();
       ctx.restore();
     }
-    ctx.font=`${hov?'500':'300'} ${cvs.width<600?'0.52rem':'0.6rem'} 'Jost',sans-serif`;
-    ctx.fillStyle=hov?'rgba(245,230,184,1)':'rgba(201,168,76,0.6)';
+    ctx.font=`${hov?'600':'500'} ${cvs.width<600?'0.78rem':'0.85rem'} 'Jost',sans-serif`;
+    ctx.fillStyle=hov?'rgba(245,230,184,1)':'rgba(201,168,76,0.85)';
     ctx.textAlign='center';
     ctx.fillText(n.label.toUpperCase(),p.x,p.y+br+16);
   });
