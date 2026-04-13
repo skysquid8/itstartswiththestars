@@ -1,0 +1,245 @@
+---
+layout: false
+pagination:
+  data: blogPosts
+  size: 10
+  alias: posts
+permalink: "{% if pagination.pageNumber == 0 %}/blog/{% else %}/blog/page/{{ pagination.pageNumber + 1 }}/{% endif %}"
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cosmic Journal — It Starts With The Stars</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="{{ site.settings.fontsUrl }}" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --night: #1e2740;
+      --night-deep: #151d30;
+      --gold: #c9a84c;
+      --gold-light: #e0c872;
+      --moon: #d8e4ff;
+      --moon-dim: #8a9cc0;
+      --glass: rgba(30, 39, 64, 0.85);
+    }
+
+    body {
+      font-family: 'Jost', sans-serif;
+      background: var(--night);
+      color: var(--moon);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    a { color: var(--gold); text-decoration: none; transition: color 0.2s; }
+    a:hover { color: var(--gold-light); }
+
+    /* NAV */
+    .blog-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 2rem;
+      background: var(--night-deep);
+      border-bottom: 1px solid rgba(201, 168, 76, 0.15);
+    }
+    .blog-nav__logo {
+      font-family: 'Cinzel', serif;
+      font-size: 1.2rem;
+      color: var(--gold);
+      letter-spacing: 0.05em;
+    }
+    .blog-nav__back {
+      font-size: 0.9rem;
+      color: var(--moon-dim);
+    }
+    .blog-nav__back:hover { color: var(--gold); }
+
+    /* HEADER */
+    .blog-header {
+      text-align: center;
+      padding: 3rem 1rem 2rem;
+    }
+    .blog-header__title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3rem;
+      font-weight: 300;
+      color: var(--gold);
+      letter-spacing: 0.04em;
+    }
+    .blog-header__subtitle {
+      font-size: 1rem;
+      color: var(--moon-dim);
+      margin-top: 0.5rem;
+    }
+
+    /* POST GRID */
+    .post-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 1rem 2rem 3rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 2rem;
+    }
+
+    .post-card {
+      background: var(--night-deep);
+      border: 1px solid rgba(201, 168, 76, 0.12);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .post-card:hover {
+      border-color: rgba(201, 168, 76, 0.4);
+      transform: translateY(-3px);
+    }
+
+    .post-card__img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      display: block;
+    }
+    .post-card__img-placeholder {
+      width: 100%;
+      height: 200px;
+      background: linear-gradient(135deg, var(--night) 0%, var(--night-deep) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      color: var(--gold);
+      opacity: 0.4;
+    }
+
+    .post-card__body {
+      padding: 1.5rem;
+    }
+    .post-card__date {
+      font-size: 0.8rem;
+      color: var(--moon-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.5rem;
+    }
+    .post-card__title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--moon);
+      line-height: 1.3;
+      margin-bottom: 0.75rem;
+    }
+    .post-card__title a { color: var(--moon); }
+    .post-card__title a:hover { color: var(--gold); }
+    .post-card__excerpt {
+      font-size: 0.92rem;
+      color: var(--moon-dim);
+      line-height: 1.5;
+    }
+    .post-card__read-more {
+      display: inline-block;
+      margin-top: 1rem;
+      font-size: 0.85rem;
+      color: var(--gold);
+      letter-spacing: 0.04em;
+    }
+
+    /* PAGINATION */
+    .pagination {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1.5rem;
+      padding: 2rem 1rem 3rem;
+    }
+    .pagination a {
+      font-size: 0.95rem;
+      padding: 0.5rem 1.2rem;
+      border: 1px solid var(--gold);
+      border-radius: 6px;
+      color: var(--gold);
+      transition: background 0.2s;
+    }
+    .pagination a:hover {
+      background: rgba(201, 168, 76, 0.15);
+    }
+    .pagination__info {
+      font-size: 0.85rem;
+      color: var(--moon-dim);
+    }
+
+    /* FOOTER */
+    .blog-footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      border-top: 1px solid rgba(201, 168, 76, 0.1);
+      font-size: 0.8rem;
+      color: var(--moon-dim);
+    }
+
+    @media (max-width: 600px) {
+      .blog-header__title { font-size: 2.2rem; }
+      .post-grid { padding: 1rem; gap: 1.5rem; grid-template-columns: 1fr; }
+      .blog-nav { padding: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="blog-nav">
+    <a href="/" class="blog-nav__logo">It Starts With The Stars</a>
+    <a href="/" class="blog-nav__back">&larr; Back to Main Site</a>
+  </nav>
+
+  <header class="blog-header">
+    <h1 class="blog-header__title">Cosmic Journal</h1>
+    <p class="blog-header__subtitle">Astrology insights, tarot wisdom, and celestial guidance</p>
+  </header>
+
+  <main class="post-grid">
+    {% for post in posts %}
+    <article class="post-card">
+      {% if post.featuredImage %}
+        <img class="post-card__img" src="{{ post.featuredImage }}" alt="{{ post.title }}" loading="lazy">
+      {% else %}
+        <div class="post-card__img-placeholder">&#x2726;</div>
+      {% endif %}
+      <div class="post-card__body">
+        <time class="post-card__date" datetime="{{ post.date }}">
+          {{ post.date | blogDate }}
+        </time>
+        <h2 class="post-card__title">
+          <a href="/blog/{{ post.slug }}/">{{ post.title }}</a>
+        </h2>
+        <p class="post-card__excerpt">{{ post.excerpt }}</p>
+        <a class="post-card__read-more" href="/blog/{{ post.slug }}/">Read more &rarr;</a>
+      </div>
+    </article>
+    {% endfor %}
+  </main>
+
+  {% if pagination.pages.length > 1 %}
+  <nav class="pagination">
+    {% if pagination.href.previous %}
+      <a href="{{ pagination.href.previous }}">&larr; Previous</a>
+    {% endif %}
+    <span class="pagination__info">Page {{ pagination.pageNumber + 1 }} of {{ pagination.pages.length }}</span>
+    {% if pagination.href.next %}
+      <a href="{{ pagination.href.next }}">Next &rarr;</a>
+    {% endif %}
+  </nav>
+  {% endif %}
+
+  <footer class="blog-footer">
+    &copy; 2026 It Starts With The Stars. All rights reserved.
+  </footer>
+
+</body>
+</html>

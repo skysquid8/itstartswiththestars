@@ -1,0 +1,252 @@
+---
+layout: false
+pagination:
+  data: blogPosts
+  size: 1
+  alias: post
+permalink: "/blog/{{ post.slug }}/"
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ post.title }} — It Starts With The Stars</title>
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="{{ post.title }}">
+  <meta property="og:description" content="{{ post.excerpt | truncate(160) }}">
+  {% if post.featuredImage %}
+  <meta property="og:image" content="{{ post.featuredImage }}">
+  {% endif %}
+  <meta property="og:url" content="https://itstartswiththestars.com/blog/{{ post.slug }}/">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="It Starts With The Stars">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ post.title }}">
+  <meta name="twitter:description" content="{{ post.excerpt | truncate(160) }}">
+  {% if post.featuredImage %}
+  <meta name="twitter:image" content="{{ post.featuredImage }}">
+  {% endif %}
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="{{ site.settings.fontsUrl }}" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --night: #1e2740;
+      --night-deep: #151d30;
+      --gold: #c9a84c;
+      --gold-light: #e0c872;
+      --moon: #d8e4ff;
+      --moon-dim: #8a9cc0;
+    }
+
+    body {
+      font-family: 'Jost', sans-serif;
+      background: var(--night);
+      color: var(--moon);
+      min-height: 100vh;
+      line-height: 1.7;
+    }
+
+    a { color: var(--gold); text-decoration: none; transition: color 0.2s; }
+    a:hover { color: var(--gold-light); }
+
+    /* NAV */
+    .blog-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 2rem;
+      background: var(--night-deep);
+      border-bottom: 1px solid rgba(201, 168, 76, 0.15);
+    }
+    .blog-nav__logo {
+      font-family: 'Cinzel', serif;
+      font-size: 1.2rem;
+      color: var(--gold);
+      letter-spacing: 0.05em;
+    }
+    .blog-nav__back {
+      font-size: 0.9rem;
+      color: var(--moon-dim);
+    }
+    .blog-nav__back:hover { color: var(--gold); }
+
+    /* ARTICLE */
+    .post-article {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 4rem;
+    }
+
+    .post-article__back {
+      display: inline-block;
+      font-size: 0.9rem;
+      color: var(--moon-dim);
+      margin-bottom: 2rem;
+    }
+    .post-article__back:hover { color: var(--gold); }
+
+    .post-article__title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.8rem;
+      font-weight: 300;
+      color: var(--moon);
+      line-height: 1.2;
+      margin-bottom: 0.75rem;
+    }
+
+    .post-article__date {
+      font-size: 0.85rem;
+      color: var(--moon-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 2rem;
+      display: block;
+    }
+
+    .post-article__featured-img {
+      width: 100%;
+      border-radius: 10px;
+      margin-bottom: 2rem;
+      display: block;
+    }
+
+    /* CONTENT TYPOGRAPHY */
+    .post-content {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: var(--moon);
+    }
+
+    .post-content p {
+      margin-bottom: 1.4rem;
+    }
+
+    .post-content h1, .post-content h2, .post-content h3,
+    .post-content h4, .post-content h5, .post-content h6 {
+      font-family: 'Cormorant Garamond', serif;
+      color: var(--moon);
+      margin: 2rem 0 1rem;
+      line-height: 1.3;
+    }
+    .post-content h2 { font-size: 1.8rem; font-weight: 600; }
+    .post-content h3 { font-size: 1.4rem; font-weight: 600; }
+
+    .post-content a {
+      color: var(--gold);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .post-content a:hover { color: var(--gold-light); }
+
+    .post-content img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin: 1.5rem 0;
+      display: block;
+    }
+
+    .post-content blockquote {
+      border-left: 3px solid var(--gold);
+      padding: 1rem 1.5rem;
+      margin: 1.5rem 0;
+      background: rgba(201, 168, 76, 0.06);
+      border-radius: 0 8px 8px 0;
+      font-style: italic;
+      color: var(--moon-dim);
+    }
+
+    .post-content ul, .post-content ol {
+      margin: 1rem 0 1.4rem 1.5rem;
+    }
+    .post-content li {
+      margin-bottom: 0.5rem;
+    }
+
+    .post-content hr {
+      border: none;
+      border-top: 1px solid rgba(201, 168, 76, 0.2);
+      margin: 2rem 0;
+    }
+
+    .post-content strong {
+      color: var(--moon);
+      font-weight: 500;
+    }
+
+    .post-content em {
+      color: var(--gold-light);
+    }
+
+    /* BACK LINK BOTTOM */
+    .post-article__back-bottom {
+      display: inline-block;
+      margin-top: 3rem;
+      padding: 0.6rem 1.4rem;
+      border: 1px solid var(--gold);
+      border-radius: 6px;
+      font-size: 0.9rem;
+      color: var(--gold);
+      transition: background 0.2s;
+    }
+    .post-article__back-bottom:hover {
+      background: rgba(201, 168, 76, 0.15);
+    }
+
+    /* FOOTER */
+    .blog-footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      border-top: 1px solid rgba(201, 168, 76, 0.1);
+      font-size: 0.8rem;
+      color: var(--moon-dim);
+    }
+
+    @media (max-width: 600px) {
+      .post-article__title { font-size: 2rem; }
+      .post-article { padding: 1.5rem 1rem 3rem; }
+      .blog-nav { padding: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="blog-nav">
+    <a href="/" class="blog-nav__logo">It Starts With The Stars</a>
+    <a href="/" class="blog-nav__back">&larr; Back to Main Site</a>
+  </nav>
+
+  <article class="post-article">
+    <a href="/blog/" class="post-article__back">&larr; Back to Journal</a>
+
+    <h1 class="post-article__title">{{ post.title }}</h1>
+
+    <time class="post-article__date" datetime="{{ post.date }}">
+      {{ post.date | blogDate }}
+    </time>
+
+    {% if post.featuredImage %}
+      <img class="post-article__featured-img" src="{{ post.featuredImage }}" alt="{{ post.title }}">
+    {% endif %}
+
+    <div class="post-content">
+      {{ post.content | safe }}
+    </div>
+
+    <a href="/blog/" class="post-article__back-bottom">&larr; Back to Journal</a>
+  </article>
+
+  <footer class="blog-footer">
+    &copy; 2026 It Starts With The Stars. All rights reserved.
+  </footer>
+
+</body>
+</html>

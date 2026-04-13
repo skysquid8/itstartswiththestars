@@ -10,6 +10,7 @@
       { "text": "Daily Cosmic", "href": "#daily" },
       { "text": "Sessions", "href": "#services" },
       { "text": "Gatherings", "href": "#parties" },
+      { "text": "Journal", "href": "/blog/" },
       { "text": "Book Now", "href": "#booking" }
     ],
     "ctaText": "Book a Reading",
@@ -309,7 +310,8 @@
           { "text": "Daily Cosmic", "href": "#daily" },
           { "text": "Sessions", "href": "#services" },
           { "text": "Gatherings", "href": "#parties" },
-          { "text": "Book a Reading", "href": "#booking" }
+          { "text": "Book a Reading", "href": "#booking" },
+          { "text": "Cosmic Journal", "href": "/blog/" }
         ]
       },
       {
